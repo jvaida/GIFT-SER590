@@ -585,7 +585,7 @@ namespace ExampleTrainingApplication
         /// It will allow this application to send content to GIFT via an XML-RPC call.
         /// </summary>
         /// <param name="content"></param>
-        [XmlRpcMethod("mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationMessage")]
+        [XmlRpcMethod("mil.arl.gift.gateway.interop.myplugin.MyPluginInterface$MyPluginXMLRPC.handleTrainingApplicationMessage")]
         void trainingApplicationStateMessage(String content);
 
         /// <summary>
@@ -593,7 +593,7 @@ namespace ExampleTrainingApplication
         /// It will allow this application to notify GIFT of a 'finished' condition via an XML-RPC call.
         /// </summary>
         /// <param name="content"></param>
-        [XmlRpcMethod("mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationFinished")]
+        [XmlRpcMethod("mil.arl.gift.gateway.interop.myplugin.MyPluginInterface$MyPluginXMLRPC.handleTrainingApplicationFinished")]
         void trainingApplicationFinished();
 
         /// <summary>

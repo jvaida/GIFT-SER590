@@ -153,5 +153,15 @@
                 <grpcNetworkPort>5001</grpcNetworkPort>
             </RIDE>
         </InteropInterfaceConfig>
+        <InteropInterfaceConfig refID="17">
+                <available>true</available>
+                <impl>gateway.interop.myplugin.MyPluginInterface</impl>
+                <name>My Plugin</name>
+                <XML-RPC>
+                    <ExternalServerNetworkAddress>127.0.0.1</ExternalServerNetworkAddress>
+                    <ExternalServerNetworkPort>10567</ExternalServerNetworkPort>
+                    <ServerNetworkPort>10566</ServerNetworkPort>          
+                </XML-RPC>
+        </InteropInterfaceConfig>
     </interfaceConfigurations>
 </InteropConfig>

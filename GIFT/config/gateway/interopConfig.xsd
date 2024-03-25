@@ -53,6 +53,7 @@
           <xs:element ref="Unity"/>
 		  <xs:element ref="SESandbox"/>
 		  <xs:element ref="RIDE"/>
+		  <xs:element ref="My-Plugin-XML-RPC"/>
         </xs:choice>
       </xs:sequence>
       <xs:attribute name="refID" use="required" type="xs:integer">
@@ -488,6 +489,66 @@
       <xs:sequence>
         <xs:element ref="networkPort"/>
         <xs:element ref="networkAddress"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+	<xs:element name="My-Plugin-XML-RPC">
+	<xs:annotation>
+		<xs:appinfo>
+			<fg:node-info message="XML-RPC Input"> 
+			<fg:message>Input for a XML-RPC Example interop config interface.</fg:message>
+			</fg:node-info> 
+		</xs:appinfo>
+	</xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+		  <xs:element name="ExternalServerNetworkAddress">
+			<xs:annotation>
+				<xs:appinfo>
+					<fg:node-info message="External XML-RPC Server Network Address"> 
+					<fg:message>A network IP address (no port information) of an XML-RPC server. E.g. 127.0.0.1</fg:message>
+					<fg:message>This address will be used to connect a GIFT XML-RPC client to the server.</fg:message>
+					</fg:node-info> 
+				</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		   </xs:element>
+		  <xs:element name="ExternalServerNetworkPort">
+			<xs:annotation>
+				<xs:appinfo>
+					<fg:node-info message="External XML-RPC Server Network Port"> 
+						<fg:message>A network port number of an XML-RPC server. E.g. 10524</fg:message>
+						<fg:message>This port will be used to connect a GIFT XML-RPC client to the server.</fg:message>
+					</fg:node-info> 
+				</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="65535"/>
+				</xs:restriction>
+			</xs:simpleType>
+		  </xs:element>
+          <xs:element name="ServerNetworkPort">
+			<xs:annotation>
+				<xs:appinfo>
+					<fg:node-info message="My-Plugin-XML-RPC Server Network Port"> 
+						<fg:message>A network port number used for an XML-RPC Server created by GIFT. E.g. 10524</fg:message>
+						<fg:message>This port number must match the XML-RPC client's port number.</fg:message>
+					</fg:node-info> 
+				</xs:appinfo>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="65535"/>
+				</xs:restriction>
+			</xs:simpleType>
+		  </xs:element>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

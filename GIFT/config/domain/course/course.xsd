@@ -1013,6 +1013,7 @@
 					<xs:element ref="SimpleExampleTAInteropInputs"/>
                     <xs:element ref="TC3InteropInputs"/>
                     <xs:element ref="DETestbedInteropInputs"/>
+					<xs:element ref="MyPluginInputs"/>
                     <xs:element ref="VBSInteropInputs"/>                 
 					<xs:element ref="VREngageInteropInputs"/>
 					<xs:element ref="UnityInteropInputs"/>
@@ -1121,6 +1122,46 @@
             <xs:appinfo>
                 <fg:node-info exposed="true" message="Simple Example TA Interoperability Interface Inputs">
                     <fg:message>By specifying the Simple Example TA Interop element for the Training Application, the Gateway module will be configured to use the Simple Example TA Interop configuration specified in the interopConfig.xml for the duration of the lesson that uses this instance of the training application.</fg:message>
+                </fg:node-info>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="loadArgs">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <fg:node-info exposed="true" message="Load Arguments">
+                                <fg:message>These are the arguments sent to the Gateway module with the Siman.Load message.  The arguments are used to configure or execute logic in the interop interface.</fg:message>
+                            </fg:node-info>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ScenarioName">
+                                <xs:annotation>
+                                    <xs:appinfo>
+                                        <fg:node-info exposed="true" message="Scenario Name">
+                                            <fg:message>Name of an Example Scenario.  The value is used by Example scripting to load the scenario.  The value matches the name of a FITS scenario folder and is one of the entries shown in FITS scenario selection screens.</fg:message>
+                                        </fg:node-info>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	<xs:element name="MyPluginInputs">
+        <xs:annotation>
+            <xs:appinfo>
+                <fg:node-info exposed="true" message="My Interoperability Interface Inputs">
+                    <fg:message>Used to provide interop inputs for the interop plugin represented by the MyPluginInterface class in the Gateway module.</fg:message>
                 </fg:node-info>
             </xs:appinfo>
         </xs:annotation>
