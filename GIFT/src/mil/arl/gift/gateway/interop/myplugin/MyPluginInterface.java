@@ -1,6 +1,11 @@
+/**
+ * Copyright Dignitas Technologies, LLC
+ * 
+ * This file and its contents are governed by one or more distribution and
+ * copyright statements as described in the LICENSE.txt file distributed with
+ * this work.
+ */
 package mil.arl.gift.gateway.interop.myplugin;
-
-import generated.course.MyPluginInputs;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.xmlrpc.XmlRpcException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,35 +34,57 @@ import mil.arl.gift.net.api.message.Message;
 import mil.arl.gift.net.xmlrpc.XMLRPCClient;
 import mil.arl.gift.net.xmlrpc.XMLRPCServer;
 
+/**
+ * This interop plugin is used to communicate with the C# 'Simple Example Training App' located
+ * in Training.Apps\ExampleTrainingApplication folder.  
+ * 
+ * The Simple Example Training Application C# program presents a window to handle various
+ * interactions with GIFT.  That application communicates to GIFT via this plugin class using XML-RPC.
+ * There are other communication protocols that could have been chosen such as using Sockets (used in the
+ * existing DIS interop plugin), however we fealt that XML-RPC is a little easier for beginner Java programmers.
+ * 
+ * This plugin will register to handle SIMAN and Display Feedback GIFT messages.
+ * 
+ * Note: All GIFT messages received by interop plugins will be during the 'Training Application' part of 
+ * a GIFT course.
+ * 
+ * @author mhoffman
+ *
+ */
 public class MyPluginInterface extends AbstractInteropInterface {
     
     /** Instance of the logger */
     private static Logger logger = LoggerFactory.getLogger(MyPluginInterface.class);
-
+    
     /**
-     * contains the types of GIFT messages this interop interface can translate and handle or send
-     * on to the training application
+     * contains the types of GIFT messages this interop interface can consume from GIFT modules
+     * and handle or send to some external training application
      */
-    private static List<MessageTypeEnum> supportedMsgTypes;   
+    private static List<MessageTypeEnum> supportedMsgTypes;    
     static{
         supportedMsgTypes = new ArrayList<MessageTypeEnum>();
         supportedMsgTypes.add(MessageTypeEnum.SIMAN);
         supportedMsgTypes.add(MessageTypeEnum.DISPLAY_FEEDBACK_GATEWAY_REQUEST);
     }
-
+    
     private static List<TrainingApplicationEnum> REQ_TRAINING_APPS;
     static{
         REQ_TRAINING_APPS = new ArrayList<TrainingApplicationEnum>();
-        REQ_TRAINING_APPS.add(TrainingApplicationEnum.SIMPLE_EXAMPLE_TA);
+        REQ_TRAINING_APPS.add(TrainingApplicationEnum.SIMPLE_EXAMPLE_TA); 
     }
-
+    
+    /**
+     * contains the list of GIFT messages (e.g. Entity State) that this interop plugin interface
+     * can create and send to GIFT modules (e.g. Domain module) after consuming some relevant information from 
+     * an external training applications (e.g. VBS). 
+     */
     private static List<MessageTypeEnum> PRODUCED_MSG_TYPES;
     static{
         PRODUCED_MSG_TYPES = new ArrayList<MessageTypeEnum>();
         PRODUCED_MSG_TYPES.add(MessageTypeEnum.STOP_FREEZE);
         PRODUCED_MSG_TYPES.add(MessageTypeEnum.SIMPLE_EXAMPLE_STATE);
     }
-
+    
     /** This is the AHK class name of the Example Training Application window used to manipulate the window */
     private static final String WINDOW_TITLE = "Simple Example Training Application";
     //MH 4/4/14 - It was finally figured out that the suffix to the c# window is based on the visual studio version,
@@ -67,122 +93,120 @@ public class MyPluginInterface extends AbstractInteropInterface {
     //private static final String AHK_CLASS_DEBUG = "WindowsForms10.Window.8.app.0.bf7771";
     //private static final String AHK_CLASS = "WindowsForms10.Window.8.app.0.378734a";
     private static final String AHK_CLASS = GatewayModuleUtils.AHK_CLASS_WILDCARD;
-
+    
     /** this exe will launch the Simple Example Training Application */
     private static final File APP_EXE = 
-    new File(".." + File.separator + "Training.Apps" + File.separator + "SimpleExampleTrainingApplication" + File.separator + 
-            "ExampleTrainingApplication" + File.separator + "bin" + File.separator + "Release" + File.separator + "ExampleTrainingApplication.exe");
+            new File(".." + File.separator + "Training.Apps" + File.separator + "SimpleExampleTrainingApplication" + File.separator + 
+                    "ExampleTrainingApplication" + File.separator + "bin" + File.separator + "Release" + File.separator + "ExampleTrainingApplication.exe");
 
     /** this is the process that launches the TA and allows this class to monitor whether the TA has closed or not */
     private Process trainingAppProcess = null;
-
+    
     /**
      * The XML RPC server created by this class to allow the training application to remotely call methods
      * in this class, mainly the 'handleTrainingApplicationMessage' method.
      */
     private XMLRPCServer server;
-
+    
     /**
      * The XML RPC client created by this class to call remote methods in the training application C# program which
      * is hosting an XML RPC server.
      */
     private XMLRPCClient client;
-
+    
+    /** the Simple Example TA XML-RPC hosted method names */
     private static final String TA_LOAD_METHOD_NAME = "load";
     private static final String TA_BLOB_METHOD_NAME = "blob";
     private static final String TA_CLOSE_APP_METHOD_NAME = "closeApplication";
-
-
+    
     /** needed for XML-RPC called methods that will need to send messages via the Gateway module */
     private static MyPluginInterface instance = null;
-
-/**
+    
+    /**
      * This inner class contains the RPC methods the training application RPC client can call.
      * The only reason I choose not to use the outer class of SimpleExamplePluginTAPluginInterface was to prevent having
      * to create another constructor (as mentioned in the Notes below) and to organize the RPC methods
      * together instead of possible exposing other methods in ExamplePLuginInterface.
-     *
-     * Notes:
+     * 
+     * Notes: 
      * 1) This class must contain either no class constructor OR an empty constructor.
      * 2) Every RPC method must return a non-null, non-void, non java.lang.Object value (e.g. Integer).
      * 3) if using an inner class, the class must be static
-     * 
+     *  
      * @author mhoffman
      *
      */
     public static class MyPluginXMLRPC{
-
+        
         /**
-         * This is a RPC method hosted by the RPC server in this class and called by the
+         * This is a RPC method hosted by the RPC server in this class and called by the 
          * training application's RPC client to handle 'game state' messages.
-         *
-         * XML-RPC method name =
-         *  "mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationMessage" 
-         *
+         * 
+         * XML-RPC method name = 
+         *  "mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationMessage"
+         * 
          * @param message the training application message content
          * @return Integer an arbitrary return object to satisfy the XML-RPC library requirements
          */
         public Integer handleTrainingApplicationMessage(String message){
-
+            
             SimpleExampleState exampleState = new SimpleExampleState(message);
-            sendMessageToGIFT(exampleState, MessageTypeEnum.SIMPLE_EXAMPLE_STATE);  
-
+            sendMessageToGIFT(exampleState, MessageTypeEnum.SIMPLE_EXAMPLE_STATE);   
+            
             return XMLRPCServer.EMPTY_RETURN_OBJECT;
         }
-
+        
         /**
-         * This is a RPC method hosted by the RPC server in this class and called by the
+         * This is a RPC method hosted by the RPC server in this class and called by the 
          * training application's RPC client to notify GIFT that the TA is finished.
-         *
-         * XML-RPC method name =
-         *  "mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationFinished" 
-         *
+         * 
+         * XML-RPC method name = 
+         *  "mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationFinished"
+         * 
          * @return Integer an arbitrary return object to satisfy the XML-RPC library requirements
          */
         public Integer handleTrainingApplicationFinished(){
-
+            
             StopFreeze stopFreeze = new StopFreeze(0, 0, 0, 0);
-            sendMessageToGIFT(stopFreeze, MessageTypeEnum.STOP_FREEZE);  
-
+            sendMessageToGIFT(stopFreeze, MessageTypeEnum.STOP_FREEZE);   
+            
             return XMLRPCServer.EMPTY_RETURN_OBJECT;
         }
     }
-
+    
     /**
      * Class constructor
-     *
+     * 
      * @param name - the display name of the plugin
      */
     public MyPluginInterface(String name){
-        super(name, true);
-
+        super(name, true); 
+        
         instance = this;
     }
 
     @Override
-    public boolean configure(Serializable config) throws ConfigurationException{
-
+    public boolean configure(Serializable config) throws ConfigurationException {
+        
         if (config instanceof generated.gateway.XMLRPC) {
 
             generated.gateway.XMLRPC pluginConfig = (generated.gateway.XMLRPC) config;
-            try {
-                // server = new XMLRPCServer(pluginConfig.getServerNetworkPort(), MyPluginXMLRPC.class);
+            try{
                 server = ApplicationConnectionFactory.createXMLRPCServer(pluginConfig.getServerNetworkPort(), MyPluginXMLRPC.class);
-
-            } catch (Exception e) {
+            }catch(Exception e){
                 throw new ConfigurationException("Failed to create the XML RPC server.",
                         e.getMessage(), 
                         e);
             }
-            try {
-                // client = new XMLRPCClient(pluginConfig.getExternalServerNetworkAddress(), pluginConfig.getExternalServerNetworkPort());
+            
+            try{
                 client = ApplicationConnectionFactory.createXMLRPCClient(pluginConfig.getExternalServerNetworkAddress(), pluginConfig.getExternalServerNetworkPort());
-            } catch (IOException e) {
+            }catch(Exception e){
                 throw new ConfigurationException("Failed to create the XML RPC client.",
                         e.getMessage(), 
                         e);
             }
-
+            
             logger.info("Plugin has been configured");
 
         } else {
@@ -190,16 +214,15 @@ public class MyPluginInterface extends AbstractInteropInterface {
                     getName() + " plugin interface uses "+generated.gateway.XMLRPC.class+" interop input and doesn't support using the interop config instance of " + config,
                     null);
         }
-
+        
         return false;
     }
-
 
     @Override
     public List<MessageTypeEnum> getSupportedMessageTypes() {
         return supportedMsgTypes;
     }
-
+    
     @Override
     public void setEnabled(boolean value) throws ConfigurationException{
         
@@ -289,79 +312,39 @@ public class MyPluginInterface extends AbstractInteropInterface {
             logger.info("Stopped listening for incoming training application messages.");
         }
     }
-    
+
     /**
      * Call upon the Gateway module to construct and then send a new GIFT message using the payload
      * provided.
-     *
+     * 
      * @param payload the contents of the message to send
      * @param messageTypeEnum the enumerated type of the message
      */
-
-    private static void sendMessageToGIFT(Object payload, MessageTypeEnum messageTypeEnum){       
-        GatewayModule.getInstance().sendMessageToGIFT((TrainingAppState) payload, messageTypeEnum, instance);
+    private static void sendMessageToGIFT(TrainingAppState payload, MessageTypeEnum messageTypeEnum){        
+        GatewayModule.getInstance().sendMessageToGIFT(payload, messageTypeEnum, instance); 
     }
-
-
-    /**
-     * Call a remote method with the given parameter.
-     *
-     * @param rpcMethodName the name of the method to call on the RPC server
-     * @param param the single parameter to pass to the rpcMethod.  Can be null.
-     * @param errorMsg - used to append error content too, if an error occurs
-     * @return Object the return value of the remote method.  Can be null.
-     */   
-    private Object callRPCMethod(String rpcMethodName, String param, StringBuilder errorMsg) {
-
-        Vector<String> params = new Vector<>(1);
-        if(params != null){
-            params.addElement(param);
-        }
-
-        return callRPCMethod(rpcMethodName, params, errorMsg);
-    }
-
-    /**
-     * Call a remote method with the given parameters.
-     *
-     * @param rpcMethodName the name of the method to call on the RPC server
-     * @param params the parameters to pass to the rpcMethod.  Can be null.
-     * @param errorMsg - used to append error content too, if an error occurs
-     * @return Object the return value of the remote method.  Can be null.
-     */   
-    private Object callRPCMethod(String rpcMethodName, Vector<?> params, StringBuilder errorMsg) {
-
-        try {
-            Object returnObj = client.callMethod(rpcMethodName, params);
-            return returnObj;
-        } catch (XmlRpcException e) {
-            logger.error("There was an exception thrown when calling the RPC method of "+rpcMethodName+".", e);
-            errorMsg.append("Failed to call RPC method named "+rpcMethodName+".");
-        }
-
-        return null;
-    }    
-
-
+    
     @Override
     public boolean handleGIFTMessage(Message message, StringBuilder errorMsg) {
+        System.out.println("Working directory: " + processBuilder.directory().getAbsolutePath());
 
         // Below is some arbitrary handling of GIFT messages.
-        // In most instances your interop plugin will need to handle SIMAN messages in order to
+        // In most instances your interop plugin will need to handle SIMAN messages in order to 
         // allow GIFT to synchronize with the TA.
         // Look at the other interop plugins for more examples of handling GIFT messages.
-
+        
         if (message.getMessageType() == MessageTypeEnum.SIMAN) {
 
             Siman siman = (Siman) message.getPayload();
-
-            if (siman.getSimanTypeEnum() == SimanTypeEnum.LOAD) {
-
+            
+            if (siman.getSimanTypeEnum() == SimanTypeEnum.LOAD) { 
+                
+                //Parse the specific load arguments authored in the course for this interop plugin
                 generated.course.InteropInputs interopInputs = getLoadArgsByInteropImpl(this.getClass().getName(), siman.getLoadArgs());
-                generated.course.MyPluginInputs inputs = (generated.course.MyPluginInputs) interopInputs.getInteropInput();
-
-                generated.course.MyPluginInputs.LoadArgs args = inputs.getLoadArgs();
-
+                generated.course.SimpleExampleTAInteropInputs inputs = (generated.course.SimpleExampleTAInteropInputs) interopInputs.getInteropInput();
+                
+                generated.course.SimpleExampleTAInteropInputs.LoadArgs args = inputs.getLoadArgs();
+                
                 //actually calling a different RPC method here, called "load" to provide another example of an RPC method.
                 try{
                     loadScenario(args.getScenarioName());
@@ -371,42 +354,70 @@ public class MyPluginInterface extends AbstractInteropInterface {
                 }
                 
             }else if(siman.getSimanTypeEnum() == SimanTypeEnum.PAUSE){
-
-                callRPCMethod("blob", "Pause message received", errorMsg);            
-
+                
+                client.callMethod(TA_BLOB_METHOD_NAME, "Pause message received", errorMsg);
+                
+                //setting the "Example Training Application" program's window to NOT be always on top,
+                //thereby allowing the user to select or view other windows in the same desktop real estate.
+                //This is optional but adds an automated look and feel
+                try{
+                    GatewayModuleUtils.setAlwaysOnTop(AHK_CLASS, WINDOW_TITLE, false);  
+                }catch(ConfigurationException e){
+                    logger.error("Failed to set the training app windows as NOT the foreground window", e);
+                }
+                
+                
             }else if(siman.getSimanTypeEnum() == SimanTypeEnum.RESTART){
-
-                callRPCMethod("blob", "Restart message received", errorMsg);
-
+                
+                client.callMethod(TA_BLOB_METHOD_NAME, "Restart message received", errorMsg);
+                
             }else if(siman.getSimanTypeEnum() == SimanTypeEnum.RESUME){
-
-                callRPCMethod("blob", "Resume message received", errorMsg);
-
+                
+                client.callMethod(TA_BLOB_METHOD_NAME, "Resume message received", errorMsg);
+                
+                //setting the "Example Training Application" program's window to be in the foreground
+                //This is optional but adds an automated look and feel
+                try{
+                    GatewayModuleUtils.setAlwaysOnTop(AHK_CLASS, WINDOW_TITLE, true);  
+                    GatewayModuleUtils.giveFocus(AHK_CLASS, WINDOW_TITLE);
+                }catch(ConfigurationException e){
+                    logger.error("Failed to set the training app windows as the foreground window", e);
+                }
+                
             }else if(siman.getSimanTypeEnum() == SimanTypeEnum.START){
-
-                callRPCMethod("blob", "Start message received", errorMsg);
-
+                
+                client.callMethod(TA_BLOB_METHOD_NAME, "Start message received", errorMsg);
+                
+                //setting the "Example Training Application" program's window to be in the foreground
+                //This is optional but adds an automated look and feel
+                try{
+                    GatewayModuleUtils.setAlwaysOnTop(AHK_CLASS, WINDOW_TITLE, true);
+                    GatewayModuleUtils.giveFocus(AHK_CLASS, WINDOW_TITLE);
+                }catch(ConfigurationException e){
+                    logger.error("Failed to set the training app windows as the foreground window", e);
+                }
+                
             }else if(siman.getSimanTypeEnum() == SimanTypeEnum.STOP){
-
-                callRPCMethod("blob", "Stop message received", errorMsg);
-
+                
+                client.callMethod(TA_CLOSE_APP_METHOD_NAME, new Vector<>(0), null);
+                
             }else{
-                errorMsg.append(getName()+" plugin can't handle siman type of "+siman.getSimanTypeEnum());
+                errorMsg.append(getName()).append(" plugin can't handle siman type of ").append(siman.getSimanTypeEnum());
                 logger.error("Found unhandled Siman type of "+siman.getSimanTypeEnum());
             }
-
-        }else if(message.getMessageType() == MessageTypeEnum.DISPLAY_FEEDBACK_GATEWAY_REQUEST){           
+            
+        }else if(message.getMessageType() == MessageTypeEnum.DISPLAY_FEEDBACK_GATEWAY_REQUEST){            
             //send some feedback text to the example training application
-
+            
             String text = (String)message.getPayload();
-            callRPCMethod("blob", "Display Feedback received with feedback of \""+text+ "\"", errorMsg);
-
+            client.callMethod(TA_BLOB_METHOD_NAME, "Display Feedback received with feedback of \""+text+ "\"", errorMsg);
+            
         }else{
             logger.error("Received unhandled GIFT message to send over to the "+getName()+" plugin, " + message);
-
-            errorMsg.append(getName()+" plugin can't handle message of type "+message.getMessageType());
+            
+            errorMsg.append(getName()).append(" plugin can't handle message of type ").append(message.getMessageType());
         }
-
+            
         return false;
     }
 
@@ -414,17 +425,17 @@ public class MyPluginInterface extends AbstractInteropInterface {
     public void cleanup() {
         server.stop();
     }
-   
+    
     @Override
     public List<TrainingApplicationEnum> getReqTrainingAppConfigurations(){
         return REQ_TRAINING_APPS;
     }
-
+    
     @Override
-    public List<MessageTypeEnum> getProducedMessageTypes() {
+    public List<MessageTypeEnum> getProducedMessageTypes(){
         return PRODUCED_MSG_TYPES;
     }
-
+    
     @Override
     public Serializable getScenarios() {
         return null;
@@ -434,34 +445,34 @@ public class MyPluginInterface extends AbstractInteropInterface {
     public Serializable getSelectableObjects() {
         return null;
     }
-
+    
     @Override
     public void loadScenario(String scenarioIdentifier)
             throws DetailedException {
         
         StringBuilder errorMsg = new StringBuilder();
-        client.callMethod("load", scenarioIdentifier, errorMsg);   
+        client.callMethod(TA_LOAD_METHOD_NAME, scenarioIdentifier, errorMsg);   
         
         if(errorMsg.length() > 0){
             throw new DetailedException("Failed to load the Simple Example TA scenario named '"+scenarioIdentifier+"'.", 
                     "There was an error when trying to load the scenario:"+errorMsg.toString(), null);
         }    
     }
-
-    @Override
-    public Serializable getCurrentScenarioMetadata() {
-        return null;
-    }
-
-
-    @Override
-    public void selectObject(Serializable objectIdentifier) throws DetailedException {
-
-    }
-
-
+    
     @Override
     public File exportScenario(File exportFolder) throws DetailedException {
         return null;
+    }  
+    
+    @Override
+    public void selectObject(Serializable objectIdentifier)
+            throws DetailedException {
+        
     }
+    
+    @Override
+    public Serializable getCurrentScenarioMetadata() throws DetailedException {
+        return null;
+    }
+
 }

@@ -50,7 +50,7 @@
 		
 		<!-- Gateway module properties used to start gateway module -->
 			<property name="GatewayName"                 	value="Gateway Console"/>
-			<property name="GatewayClass"                	value="mil.arl.gift.gateway.GatewayModule"/>
+			<property name="GatewayClass"                	value="app.src.mil.arl.gift.gateway.GatewayModule"/>
 			<property name="GatewayDebugPort"            	value="50008"/>
 			<property name="GatewayJmxArgs"              	value="-Dcom.sun.management.jmxremote.port=7008 -Dcom.sun.management.jmxremote.rmi.port=7008 ${BaseJmxArgs}"/>
 			<property name="GatewayClassPathExtension"      value="${ExternalLibsDir}/jacob/*;${BinDir}/gift-gateway.jar;${BinDir}/jacob-loader.jar;${ExternalLibsDir}/apache-xmlrpc-3.1.3/lib/*;${ExternalLibsDir}/CJWizards-0.2.jar;${ExternalLibsDir}/rabbitmq-java-client-bin-3.5.4/*;${ExternalLibsDir}/protobuf/bin/*;${ExternalLibsDir}/grpc/*;${ExternalLibsDir}/perfmark/*;${ExternalLibsDir}/opencensus/*;${ExternalLibsDir}/guava/*;${BinDir}/protobuf_generated.jar;${BinDir}/protobuf_generated_external_apps.jar;${ExternalLibsDir}/javafx-sdk-11.0.2/lib/*;${ExternalLibsDir}/jdk-11/jaxb-ri/mod/*;"/>
@@ -306,8 +306,8 @@
 		<!-- NOTE: Both platforms must use the same path to the JDK because of the reference to modules JAXB and JAF within the JDK. Without 
                    this, it would be required that separate Linux and Windows JDK paths to the modules be maintained. -->
 		<!-- TODO: Need to check for 64-bit processor and change JDK accordingly -->
-		<property name="JvmPath" value="${ExternalLibsDir}/jdk-11/bin/java"/>
-		
+				<property name="JvmPath" value="${ExternalLibsDir}/jdk-11/bin/java"/>
+				<!-- <property name="JvmPath" value="/opt/external/jdk-11/bin/java"/> -->
 		<!-- If launching from a Windows platform, use javaw.exe to launch SPL minimized. -->
 		<condition property="QuietJvmPath" value="${ExternalLibsDir}/jdk-11/bin/javaw" else="${JvmPath}">
 	        <istrue value="${isWindows}"/>
@@ -360,7 +360,7 @@
             </pathconvert>
 			<property name='PlatformArgs' value="-Dgift.os.family=&quot;${gift.os.family}&quot;"/>
 			<property name="JavaCmdLine" 
-				value='${JmxArgs} ${JavaArgs} ${PlatformArgs} ${JavaDebugArgs} -classpath "${classpath}" -Djava.library.path="${libraryPath}" -Dderby.stream.error.field="output/logger/derby.log" -Djava.io.tmpdir="${GIFT_TEMP}" "${ActiveMQHome}" "${ActiveMQBase}" ${Class} gas'/>
+				value='${JmxArgs} ${JavaArgs} ${PlatformArgs} ${JavaDebugArgs} -classpath "${classpath}" -Djava.library.path="${libraryPath}" -Dderby.stream.error.field="output/logger/derby.log" -Djava.io.tmpdir="${GIFT_TEMP}" "${ActiveMQHome}" "${ActiveMQBase}" ${Class} gas activemq'/>
 			<property name="Command" value='start "GIFT" "${QuietJvmPathLoc}" ${JavaCmdLine}'/>
 			<antcall target="runCommand"/>
 	</target>
@@ -1000,7 +1000,7 @@
 	<!-- runs the assembled command to start an application in unix using a main class -->
 	<target name="runCommandLinuxClass" if="Class">
 		<echo message="Linux based OS detected"/>
-		
+		<echo message="yo vjk, this is the JavaCmldLine ${JavaCmdLine}" />
 		<!-- 
            Executes a Java task to start a GIFT application based on its main class
         -->

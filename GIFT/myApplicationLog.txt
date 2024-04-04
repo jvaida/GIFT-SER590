@@ -1,0 +1,22 @@
+4/3/2024 12:14:47 PM: Listener started successfully
+4/3/2024 12:14:48 PM: Received request from 127.0.0.1:62638
+4/3/2024 12:14:48 PM: load called with scenarioName: Scenario X
+4/3/2024 12:14:49 PM: Received request from 127.0.0.1:62638
+4/3/2024 12:15:30 PM: Caught exception while running listener: System.Net.HttpListenerException: The I/O operation has been aborted because of either a thread exit or an application request
+   at System.Net.HttpListener.GetContext()
+   at ExampleTrainingApplication.Form1.startThread() in D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\Form1.cs:line 328
+4/3/2024 12:33:56 PM: Listener started successfully
+4/3/2024 12:33:56 PM: Received request from 127.0.0.1:63270
+4/3/2024 12:33:56 PM: load called with scenarioName: Scenario X
+4/3/2024 12:33:57 PM: Received request from 127.0.0.1:63270
+4/3/2024 12:34:12 PM: Caught exception while running listener: System.Net.HttpListenerException: The I/O operation has been aborted because of either a thread exit or an application request
+   at System.Net.HttpListener.GetContext()
+   at ExampleTrainingApplication.Form1.startThread() in D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\Form1.cs:line 328
+4/3/2024 12:36:06 PM: Listener started successfully
+4/3/2024 12:44:49 PM: Caught exception while running listener: System.Net.HttpListenerException: The I/O operation has been aborted because of either a thread exit or an application request
+   at System.Net.HttpListener.GetContext()
+   at ExampleTrainingApplication.Form1.startThread() in D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\Form1.cs:line 328
+4/3/2024 12:57:40 PM: Listener started successfully
+4/3/2024 12:57:51 PM: Caught exception while running listener: System.Net.HttpListenerException: The I/O operation has been aborted because of either a thread exit or an application request
+   at System.Net.HttpListener.GetContext()
+   at ExampleTrainingApplication.Form1.startThread() in D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\Form1.cs:line 343

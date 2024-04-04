@@ -1,0 +1,31 @@
+# Use the Centos image as the base image.
+FROM centos
+
+# Allow yum to be used to install applications in the Centos image
+RUN cd /etc/yum.repos.d/ && \
+    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+# Install dependencies for protoc and the military symbology service
+RUN yum -y install libatomic && \
+    yum -y install fontconfig && \
+    yum clean all
+
+# Define expected volume mount points for External Dir and src
+VOLUME ["/opt/external", "/app/src"]
+
+# Set working directory for container
+WORKDIR /app
+
+# Copy the Ant build file and any other necessary configuration files
+# Also copy entrypoint.sh into the image
+COPY scripts/dev-tools/Linux/GIFT/scripts/util/launchProcess /app/
+COPY scripts/util/launchProcess.xml /app/
+COPY entrypoint.sh /app/
+
+# Make entrypoint.sh executable
+RUN chmod +x /app/entrypoint.sh
+
+# Default command to run when the container starts
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["start", "gateway"]
