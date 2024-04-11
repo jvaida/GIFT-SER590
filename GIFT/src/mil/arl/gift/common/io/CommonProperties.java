@@ -146,10 +146,10 @@ public class CommonProperties {
     /** Default timeout for the module status heartbeat */
     private static final int DEFAULT_MODULE_TIMEOUT_MS = 10000;
 
-    private static final String DEFAULT_DOMAIN_DIRECTORY = "../Domain";
+    private static final String DEFAULT_DOMAIN_DIRECTORY = "/Domain";
 
     /** The default path of the Training.Apps directory */
-    private static final String DEFAULT_TRAINING_APPS_DIRECTORY = "../Training.Apps";
+    private static final String DEFAULT_TRAINING_APPS_DIRECTORY = "/Training.Apps";
 
     /** The default timeout before the lti launch request is considered stale when connecting to the dashboard server. */
     private static final int DEFAULT_LTI_TIMEOUT_DASHBOARD_MS = 10000;

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Assuming the working directory is already set to /app in the Dockerfile
-AbsBaseDir="/opt"  # Update this if your base directory is different
+AbsBaseDir="/mil"
 
 # Validate that no spaces are in the path
 if [[ "${AbsBaseDir}" = *" "* ]]; then
@@ -12,7 +11,7 @@ if [[ "${AbsBaseDir}" = *" "* ]]; then
 fi
 
 # Setup JAVA_HOME
-JAVA_HOME="/opt/external/jdk-11"  # Adjust this path if your Java installation is located elsewhere
+JAVA_HOME="/mil/external/jdk-11"
 jdkDir="${AbsBaseDir}/external/jdk-11"
 jdkDirArchive="${AbsBaseDir}/external/openjdk-11-linux.x64.GIFT.tar.gz"
 JAVA_HOME="${jdkDir}"
@@ -38,7 +37,7 @@ fi
 export JAVA_HOME
 
 # Setup ANT_HOME
-ANT_HOME="/opt/external/ant"
+ANT_HOME="/mil/external/ant"
 export ANT_HOME
 export PATH="${JAVA_HOME}/bin:${ANT_HOME}/bin:${PATH}"
 
@@ -50,17 +49,25 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Proceed to launch the gateway module using Ant
-echo "Launching the GIFT Gateway module..."
-ant -f /app/launchProcess.xml start gateway
 
-# Handle the script's exit based on Ant's execution result
+if [ -d "/mil" ]; then 
+    echo "/mil";
+fi
+
+if [ -f "/mil/arl/gift/gateway/GatewayModule.class" ]; then 
+    echo "gateway module class founddd";
+fi
+
+# Now use $1 and $2 to dynamically accept arguments from CMD
+echo "Launching the GIFT $2 module with arguments $1 $2..."
+ant -f /mil/launch/launchProcess.xml $1 $2
+
 ERROR_CODE=$?
 if [ ${ERROR_CODE} != 0 ]; then
-    echo "An error occurred while launching the GIFT Gateway module. Exiting with error code ${ERROR_CODE}."
+    echo "An error occurred while launching the GIFT module with arguments $1 $2. Exiting with error code ${ERROR_CODE}."
     exit ${ERROR_CODE}
 fi
 
 # Keep the container running
-echo "GIFT Gateway module launched successfully. Container will keep running."
+echo "GIFT $2 module launched successfully with arguments $1 $2. Container will keep running."
 tail -f /dev/null  # Prevent the container from exiting

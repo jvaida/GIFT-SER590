@@ -326,7 +326,7 @@ public class MyPluginInterface extends AbstractInteropInterface {
     
     @Override
     public boolean handleGIFTMessage(Message message, StringBuilder errorMsg) {
-        System.out.println("Working directory: " + processBuilder.directory().getAbsolutePath());
+        // System.out.println("Working directory: " + processBuilder.directory().getAbsolutePath());
 
         // Below is some arbitrary handling of GIFT messages.
         // In most instances your interop plugin will need to handle SIMAN messages in order to 

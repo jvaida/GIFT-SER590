@@ -29,9 +29,10 @@ COPY scripts/dev-tools/Linux/GIFT/scripts/util/launchProcess /mil/launch
 # COPY scripts/util/launchProcess.xml /app/ --> this will be a volume now so not req to COPY
 COPY entrypoint.sh /mil/entry
 COPY /config /config
+COPY /data /mil/data
 # Make entrypoint.sh executable
 RUN chmod +x /mil/entry/entrypoint.sh
 
 # Default command to run when the container starts
 ENTRYPOINT ["/mil/entry/entrypoint.sh"]
-CMD ["start", "gateway"]
+CMD ["start", "ums"]
