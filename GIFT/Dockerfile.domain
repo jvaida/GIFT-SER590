@@ -17,6 +17,7 @@ RUN yum -y install libatomic && \
 
 # Explicitly create the config directory
 RUN mkdir -p /mil/entry
+RUN mkdir -p /mil/data
 RUN mkdir -p /mil/launch
 RUN mkdir -p /config
 RUN mkdir -p /generated

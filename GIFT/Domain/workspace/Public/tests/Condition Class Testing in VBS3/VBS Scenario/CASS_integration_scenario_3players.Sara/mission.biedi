@@ -1,0 +1,90 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+		TITLE="CASS_integration_scenario_3players";
+		VERSION="9";
+		ADDON[]=
+		{
+			"vbs2_people_us_army_rifleman_ocp",
+			"cabuildings",
+			"camisc"
+		};
+	};
+	layers[]={};
+	DeletedMapObjects[]={};
+	Biotope="";
+	BiotopeFile="";
+	BiotopeSource=0;
+	TerrainModifs[]={0,0,0,0,0};
+	RiverModifs[]={0,0,0,0,0};
+	SnowModifs[]={0,0,0,0,0};
+	SeastatesRandomSeed=13867858;
+};
+class _unit_0
+{
+	objectType="unit";
+	height=-4.784546e-06;
+	class Arguments
+	{
+		OME_ID="637879";
+		NAME="p1";
+		URN="p1";
+		SIDE="WEST";
+		TYPE="VBS2_US_ARMY_Leader_OCP_M_medium_iotv_none_M4RCO";
+		RANK="PVT";
+		PLAYABLE="true";
+		POSITION="[12734.56419, 8781.90853, 16.94629]";
+		COLOR="[0.599989473819733,0.599989473819733,0.999982476234436]";
+		DISPLAY_NAME="(PL) (p1) (p1) Leader - M4 RCO - IOTV";
+		DISPLAY_NAME_TREE="(PL) (p1) (p1) Leader - M4 RCO - IOTV";
+	};
+};
+class _unit_1
+{
+	objectType="unit";
+	height=-1.5126953e-05;
+	class Arguments
+	{
+		OME_ID="637883";
+		NAME="p2";
+		URN="p2";
+		SIDE="WEST";
+		TYPE="VBS2_US_ARMY_Leader_OCP_F_medium_iotv_none_M4RCO";
+		RANK="PVT";
+		PLAYER="Player";
+		PLAYABLE="true";
+		POSITION="[12738.31600, 8782.21882, 17.01149]";
+		COLOR="[0.599989473819733,0.599989473819733,0.999982476234436]";
+		DISPLAY_NAME="(P) (PL) (p2) (p2) Leader - M4 RCO - IOTV (F)";
+		DISPLAY_NAME_TREE="(P) (PL) (p2) (p2) Leader - M4 RCO - IOTV (F)";
+	};
+};
+class _unit_3
+{
+	objectType="unit";
+	height=-4.2645264e-05;
+	class Arguments
+	{
+		OME_ID="637887";
+		NAME="p3";
+		URN="p3";
+		SIDE="west";
+		TYPE="VBS2_US_ARMY_Leader_OCP_F_medium_iotv_none_M4RCO";
+		RANK="PVT";
+		PLAYABLE="true";
+		POSITION="[12741.94013, 8781.74106, 17.06195]";
+		COLOR="[0.599989473819733,0.599989473819733,0.999982476234436]";
+		DISPLAY_NAME="(PL) (p3) (p3) Leader - M4 RCO - IOTV (F)";
+		DISPLAY_NAME_TREE="(PL) (p3) (p3) Leader - M4 RCO - IOTV (F)";
+		TASK_CONTROLAI="";
+	};
+};
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};

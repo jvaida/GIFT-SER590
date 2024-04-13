@@ -1,0 +1,24 @@
+# Use an OpenJDK 11 base image
+FROM openjdk:11-jre-slim
+
+# Set the working directory inside the Docker container
+WORKDIR /app
+
+# Copy the necessary JAR files into the container, assuming these are not included in the mounted external libraries
+COPY bin/gift-common.jar /app/
+COPY bin/gift-commongwt.jar /app/
+COPY bin/gift-tutor.war /app/
+COPY external/commons-fileupload-1.2.2.jar /app/
+COPY external/commons-io-2.3.jar /app/
+COPY external/commons-cli-1.2.jar /app/
+COPY external/commons-lang-2.4.jar /app/
+
+# Copy config directory
+COPY config/ /app/config/
+COPY temp/ /app/temp/
+# Set environment variables as required by the application
+ENV JAVA_OPTS="-Xmx1024m -Dcom.sun.management.jmxremote.port=7005 -Dcom.sun.management.jmxremote.rmi.port=7005 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dlog4j1.compatibility=true -Dgift.os.family=UNIX -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50005 -Djava.io.tmpdir=/app/temp -Dgift.home=/app -DSTOP.PORT=9079 -DSTOP.KEY=TutorStop"
+ENV CLASSPATH="/app/gift-common.jar:/app/gift-commongwt.jar:/app/commons-fileupload-1.2.2.jar:/app/commons-io-2.3.jar:/app/commons-cli-1.2.jar:/app/commons-lang-2.4.jar:/app/external/slf4j/*"
+
+# Set the entry point to use Java options and run Jetty
+ENTRYPOINT java $JAVA_OPTS -jar /app/external/jetty-9.4.41/start.jar jetty.base="/app/config/tutor/server" --lib="$CLASSPATH"

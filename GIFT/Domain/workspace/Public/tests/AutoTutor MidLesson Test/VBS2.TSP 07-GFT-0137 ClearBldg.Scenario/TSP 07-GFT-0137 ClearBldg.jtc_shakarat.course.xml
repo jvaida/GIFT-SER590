@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Course xmlns:ns2="http://GIFT.com/common" name="TEST - Multiple AutoTutor - TSP ClearBldg" version="11.0.1">
+    <description>This TSP Games for Training Clear Building course has the learner clear a building in VBS.</description>
+    <lastSuccessfulValidation>2019:04:11 11:42:15:529 -0400</lastSuccessfulValidation>
+    <image>regression.png</image>
+    <ns2:surveyContext>4</ns2:surveyContext>
+    <transitions>
+        <PresentSurvey>
+            <transitionName>autotutor session</transitionName>
+            <Conversation>
+                <AutoTutorSession>
+                    <AutoTutorSKO>
+                        <ns2:ATRemoteSKO>
+                            <ns2:URL>
+<ns2:address>https://dsspp.gifttutoring.org/retrieve?json={"guid":"f0890bb9-c809-45f5-9db7-8428e267674a","return":"scriptContent"}</ns2:address>
+                            </ns2:URL>
+                        </ns2:ATRemoteSKO>
+                    </AutoTutorSKO>
+                </AutoTutorSession>
+            </Conversation>
+            <fullScreen>false</fullScreen>
+            <showInAAR>false</showInAAR>
+        </PresentSurvey>
+        <Guidance>
+            <transitionName>pre VBS guidance</transitionName>
+            <message>
+                <content>Click 'Continue' to initialize the mission.</content>
+            </message>
+        </Guidance>
+        <TrainingApplication>
+            <transitionName>clear bldg VBS</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>vbs2.TSP 07-GFT-0137 ClearBldg.dkf.xml</file>
+            </dkfRef>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>TSP 07-GFT-0137 ClearBldg.jtc_shakarat</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <Guidance>
+                <transitionName>clear bldg VBS - guidance</transitionName>
+                <message>
+                    <content>Mission initializing... &lt;br/&gt; &lt;br/&gt; When the mission briefing appears, read it carefully. Click 'Continue' (in VBS) when ready to start.</content>
+                </message>
+                <displayTime>8.0</displayTime>
+                <fullScreen>true</fullScreen>
+            </Guidance>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <AAR>
+            <transitionName>clear bldg VBS AAR</transitionName>
+        </AAR>
+    </transitions>
+</Course>

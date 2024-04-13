@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="Real-time Assessment" version="11.0.1">
+    <description>This is the simplest DKF that can be used by most training applications.  It only contains 1 condition, the Application Completed Condition, which when triggered will end the domain assessment and therefore the Training Application course element.</description>
+    <resources>
+        <AvailableLearnerActions>
+            <ns3:LearnerActionsList>
+                <ns3:learnerAction>
+                    <ns3:type>Radio</ns3:type>
+                    <ns3:displayName>End Scenario</ns3:displayName>
+                </ns3:learnerAction>
+            </ns3:LearnerActionsList>
+        </AvailableLearnerActions>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Parent Task" nodeId="1">
+                <endTriggers>
+                    <trigger>
+                        <ns3:learnerActionReference>
+                            <ns3:name>End Scenario</ns3:name>
+                        </ns3:learnerActionReference>
+                        <triggerDelay>5</triggerDelay>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Corridor Posture" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.CorridorPostureCondition</conditionImpl>
+<input>
+    <CorridorPostureCondition>
+        <postures>
+            <posture>Crawling</posture>
+            <posture>Running</posture>
+            <posture>Walking</posture>
+        </postures>
+        <pathRef value="roadside path"/>
+        <teamMemberRefs>
+            <teamMemberRef>Player 1</teamMemberRef>
+            <teamMemberRef>Player 2</teamMemberRef>
+        </teamMemberRefs>
+    </CorridorPostureCondition>
+</input>
+<scoring>
+    <count name="Violation Count" units="count">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="LessThan" value="1"/>
+            <evaluator assessment="AtExpectation" operator="GreaterThanEquals" value="1"/>
+        </evaluators>
+    </count>
+    <violation_time name="Violation Time" units="hh:mm:ss">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="LessThanEquals" value="00:00:10"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThan" value="00:02:00"/>
+            <evaluator assessment="AtExpectation" operator="LessThanEquals" value="00:02:00"/>
+        </evaluators>
+    </violation_time>
+</scoring>
+                            </condition>
+                        </conditions>
+                    </concept>
+                </concepts>
+            </task>
+        </tasks>
+        <objects>
+            <PlacesOfInterest>
+                <path name="roadside path">
+                    <segment name="Segment 1">
+                        <width>1</width>
+                        <start>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>3766691.549810389</ns2:x>
+    <ns2:y>-3162565.917643111</ns2:y>
+    <ns2:z>4047302.4742864924</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                        </start>
+                        <end>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>3766678.758215841</ns2:x>
+    <ns2:y>-3162575.83560698</ns2:y>
+    <ns2:z>4047306.0932257283</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                        </end>
+                    </segment>
+                    <segment name="Segment 2">
+                        <width>1</width>
+                        <start>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>3766678.758215841</ns2:x>
+    <ns2:y>-3162575.83560698</ns2:y>
+    <ns2:z>4047306.0932257283</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                        </start>
+                        <end>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>3766665.1330533465</ns2:x>
+    <ns2:y>-3162584.833986348</ns2:y>
+    <ns2:z>4047311.194446245</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                        </end>
+                    </segment>
+                    <segment name="Segment 3">
+                        <width>1</width>
+                        <start>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>3766665.1330533465</ns2:x>
+    <ns2:y>-3162584.833986348</ns2:y>
+    <ns2:z>4047311.194446245</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                        </start>
+                        <end>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>3766651.7119490607</ns2:x>
+    <ns2:y>-3162590.9810265824</ns2:y>
+    <ns2:z>4047317.3843843495</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                        </end>
+                    </segment>
+                </path>
+            </PlacesOfInterest>
+        </objects>
+    </assessment>
+    <actions>
+        <stateTransitions>
+            <stateTransition name="corridor posture at expectation">
+                <LogicalExpression>
+                    <performanceNode name="Corridor Posture" nodeId="2">
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="at expectation"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="corridor posture below expectation">
+                <LogicalExpression>
+                    <performanceNode name="Corridor Posture" nodeId="2">
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="below expectation"/>
+                </strategyChoices>
+            </stateTransition>
+        </stateTransitions>
+        <instructionalStrategies>
+            <strategy name="at expectation">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Corridor Posture At Expectation</ns4:content>
+                            <ns4:Delivery>
+<ns4:InTutor>
+    <ns4:TextEnhancement>NoEffect</ns4:TextEnhancement>
+    <ns4:MessagePresentation>TextOnly</ns4:MessagePresentation>
+</ns4:InTutor>
+                            </ns4:Delivery>
+                        </ns4:message>
+                        <ns4:teamRef value="Player 1"/>
+                        <ns4:teamRef value="Player 2"/>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="below expectation">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Corridor Posture Below Expectation</ns4:content>
+                            <ns4:Delivery>
+<ns4:InTutor>
+    <ns4:TextEnhancement>NoEffect</ns4:TextEnhancement>
+    <ns4:MessagePresentation>TextOnly</ns4:MessagePresentation>
+</ns4:InTutor>
+                            </ns4:Delivery>
+                        </ns4:message>
+                        <ns4:teamRef value="Player 1"/>
+                        <ns4:teamRef value="Player 2"/>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+        </instructionalStrategies>
+    </actions>
+    <teamOrganization>
+        <team name="Everyone">
+            <teamMember name="Player 1" playable="true">
+                <learnerId>
+                    <entityMarking>p1</entityMarking>
+                </learnerId>
+            </teamMember>
+            <teamMember name="Player 2" playable="true">
+                <learnerId>
+                    <entityMarking>p2</entityMarking>
+                </learnerId>
+            </teamMember>
+        </team>
+    </teamOrganization>
+</Scenario>

@@ -18,7 +18,7 @@
        the WAR content from. If this property is not set, this config will default to using the compressed .war.
     -->
     <Set name="war">
-       <SystemProperty name="gift.home" default="."/><SystemProperty name="target.war" default="/bin/gift-tutor.war"/>
+       <SystemProperty name="gift.home" default="."/><SystemProperty name="target.war" default="/gift-tutor.war"/>
     </Set>
 
     <!-- System classes are classes that cannot be replaced by

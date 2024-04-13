@@ -1,0 +1,47 @@
+# Use an OpenJDK 11 base image
+FROM openjdk:11-jre-slim
+
+# Set the working directory inside the Docker container
+WORKDIR /app
+
+# Copy the application JAR files into /app
+COPY bin/gift-common.jar /app/
+COPY bin/jaxb_generated.jar /app/
+COPY bin/protobuf_generated.jar /app/
+COPY bin/json_generated.jar /app/
+COPY bin/gift-commongwt.jar /app/
+COPY bin/gift-authoring-conversion.jar /app/
+COPY bin/gift-domain.jar /app/
+COPY bin/gift-services.jar /app/
+COPY bin/legacyJsonMessageCodec.jar /app/
+
+# Copy config directory
+COPY config/ /app/config/
+
+COPY bin/war /app/bin/war/
+
+COPY Training.Apps/ /app/Training.Apps
+RUN mkdir -p /Training.Apps/SimpleExampleTrainingApplication && ln -s /app/Training.Apps/SimpleExampleTrainingApplication Training.Apps/SimpleExampleTrainingApplication
+RUN mkdir -p /Training.Apps/Util && ln -s /app/Training.Apps/Util Training.Apps/Util
+RUN mkdir -p /Training.Apps/VBS && ln -s /app/Training.Apps/VBS Training.Apps/VBS
+RUN mkdir -p /Training.Apps/VR-Engage && ln -s /app/Training.Apps/VR-Engage Training.Apps/VR-Engage
+RUN mkdir -p /Training.Apps/WrapResources && ln -s /app/Training.Apps/WrapResources Training.Apps/WrapResources
+
+#Copy Domain directory and create a symbolic link for /Domain/runtime
+COPY Domain/ /app/Domain/
+RUN mkdir -p /Domain/runtime && ln -s /app/Domain/runtime /Domain/runtime
+RUN mkdir -p /Domain/Experiments && ln -s /app/Domain/Experiments /Domain/Experiments
+RUN mkdir -p /Domain/Exports && ln -s /app/Domain/Exports /Domain/Exports
+RUN mkdir -p /Domain/Imports && ln -s /app/Domain/Imports /Domain/Imports
+RUN mkdir -p /Domain/resources && ln -s /app/Domain/resources /Domain/resources
+RUN mkdir -p /Domain/temp && ln -s /app/Domain/temp /Domain/temp
+RUN mkdir -p /Domain/workspace && ln -s /app/Domain/workspace /Domain/workspace
+
+# Adjust CLASSPATH according to the specified requirements
+ENV CLASSPATH /app/gift-common.jar:/app/jaxb_generated.jar:/app/protobuf_generated.jar:/app/json_generated.jar:/app/gift-commongwt.jar:/app/gift-authoring-conversion.jar:/app/gift-domain.jar:/app/gift-services.jar:/app/legacyJsonMessageCodec.jar:/app/external/slf4j/*:/app/external/*:/app/external/activemq/activemq-all-5.18.3.jar:/app/external/hibernate/*:/app/external/jsonsimple/json_simple-1.1.jar:/app/external/db-derby-10.15.2.0-bin/lib/derbyclient.jar:/app/external/rapidminer/lib/*:/app/external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/nuxeo/*:/app/external/protobuf/bin/*:/app/external/jdk-11/jaxb-ri/mod/*:/app/external/zip4j-1.3.2/zip4j-1.3.2.jar:/app/external/jetty-9.4.41/lib/*:/app/external/commons-codec-1.7.jar:/app/external/redmine/httpcore-4.3.jar:/app/external/redmine/httpclient-4.3.1.jar:/app/external/gson-2.3.1.jar:/app/external/lti/*:/app/external/SuperCSV-with_src-1.52.jar:/app/external/spiffy-with_source-all-0.05.jar:/app/external/apache-poi-3.15/*
+
+# Java options including library paths and system properties
+ENV JAVA_OPTS -Djava.awt.headless=true -Dcom.sun.management.jmxremote.port=7007 -Dcom.sun.management.jmxremote.rmi.port=7007 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dgift.os.family="UNIX" -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50007 -Djava.library.path=/app/external/simile -Djava.io.tmpdir=/app/temp
+
+# The ENTRYPOINT has been updated to use the environment variables for CLASSPATH and JAVA_OPTS
+ENTRYPOINT java $JAVA_OPTS -cp $CLASSPATH mil.arl.gift.domain.DomainModule

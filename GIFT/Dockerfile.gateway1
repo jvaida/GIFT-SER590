@@ -1,0 +1,23 @@
+# Use an OpenJDK 11 base image
+FROM openjdk:11-jre-slim
+
+# Set the working directory inside the Docker container
+WORKDIR /app
+
+# Copy the necessary JAR files into the container
+COPY bin/gift-common.jar /app/
+COPY bin/jaxb_generated.jar /app/
+COPY bin/protobuf_generated.jar /app/
+COPY bin/json_generated.jar /app/
+COPY bin/gift-gateway.jar /app/
+COPY bin/jacob-loader.jar /app/
+COPY bin/protobuf_generated_external_apps.jar /app/
+
+COPY config/ /app/config/
+
+# Set environment variables as required by the application
+ENV JAVA_OPTS="-Djava.awt.headless=true -Dcom.sun.management.jmxremote.port=7008 -Dcom.sun.management.jmxremote.rmi.port=7008 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dgift.os.family=UNIX -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50008 -Djava.library.path=/app/external/jacob -Djava.io.tmpdir=/app/temp"
+ENV CLASSPATH="/app/gift-common.jar:/app/jaxb_generated.jar:/app/protobuf_generated.jar:/app/json_generated.jar:/app/gift-gateway.jar:/app/jacob-loader.jar:/app/protobuf_generated_external_apps.jar:/app/external/slf4j/*:/app/external/*:/app/external/activemq/activemq-all-5.18.3.jar:/app/external/hibernate/*:/app/external/jsonsimple/json_simple-1.1.jar:/app/external/db-derby-10.15.2.0-bin/lib/derbyclient.jar:/app/external/rapidminer/lib/*:/app/external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/nuxeo/*:/app/external/protobuf/bin/*:/app/external/jdk-11/jaxb-ri/mod/*:/app/external/zip4j-1.3.2/zip4j-1.3.2.jar:/app/external/jacob/*:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/CJWizards-0.2.jar:/app/external/rabbitmq-java-client-bin-3.5.4/*:/app/external/grpc/*:/app/external/perfmark/*:/app/external/opencensus/*:/app/external/guava/*:/app/external/javafx-sdk-11.0.2/lib/*:/app/external/jdk-11/jaxb-ri/mod/*"
+
+# Run your application with all JARs and libraries included
+ENTRYPOINT java $JAVA_OPTS -cp $CLASSPATH mil.arl.gift.gateway.GatewayModule

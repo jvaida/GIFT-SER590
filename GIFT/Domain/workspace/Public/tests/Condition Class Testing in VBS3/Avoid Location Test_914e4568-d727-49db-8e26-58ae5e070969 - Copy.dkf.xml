@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="Real-time Assessment" version="11.0.1">
+    <description>This is the simplest DKF that can be used by most training applications.  It only contains 1 condition, the Application Completed Condition, which when triggered will end the domain assessment and therefore the Training Application course element.</description>
+    <resources>
+        <AvailableLearnerActions>
+            <ns3:LearnerActionsList>
+                <ns3:learnerAction>
+                    <ns3:type>Radio</ns3:type>
+                    <ns3:displayName>End</ns3:displayName>
+                </ns3:learnerAction>
+            </ns3:LearnerActionsList>
+        </AvailableLearnerActions>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Parent Task" nodeId="1">
+                <endTriggers>
+                    <trigger>
+                        <ns3:learnerActionReference>
+                            <ns3:name>End</ns3:name>
+                        </ns3:learnerActionReference>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Halt" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.HaltCondition</conditionImpl>
+<input>
+    <HaltConditionInput>
+        <teamMemberRefs>
+            <teamMemberRef>Player1</teamMemberRef>
+            <teamMemberRef>Player2</teamMemberRef>
+        </teamMemberRefs>
+    </HaltConditionInput>
+</input>
+<scoring>
+    <count name="Violation Count" units="count">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="LessThan" value="2"/>
+            <evaluator assessment="AtExpectation" operator="GreaterThanEquals" value="2"/>
+        </evaluators>
+    </count>
+    <violation_time name="Violation Time" units="hh:mm:ss">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="LessThan" value="00:00:03"/>
+            <evaluator assessment="AtExpectation" operator="GreaterThanEquals" value="00:00:03"/>
+        </evaluators>
+    </violation_time>
+    <completion_time name="Completion Time" units="hh:mm:ss">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="00:00:30"/>
+            <evaluator assessment="AtExpectation" operator="LessThan" value="00:00:30"/>
+            <evaluator assessment="AboveExpectation" operator="LessThanEquals" value="00:00:15"/>
+        </evaluators>
+    </completion_time>
+</scoring>
+                            </condition>
+                        </conditions>
+                    </concept>
+                </concepts>
+            </task>
+        </tasks>
+        <objects>
+            <PlacesOfInterest>
+                <point name="Fence Opening Across From Start Location">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3766699.053641085</ns2:x>
+                            <ns2:y>-3162545.5415595924</ns2:y>
+                            <ns2:z>4047311.8287788657</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+            </PlacesOfInterest>
+        </objects>
+    </assessment>
+    <actions>
+        <stateTransitions>
+            <stateTransition name="Halt At Expectation">
+                <LogicalExpression>
+                    <performanceNode name="Halt" nodeId="2">
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="at expectation"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="Halt Below Expectation">
+                <LogicalExpression>
+                    <performanceNode name="Halt" nodeId="2">
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="below expectation"/>
+                </strategyChoices>
+            </stateTransition>
+        </stateTransitions>
+        <instructionalStrategies>
+            <strategy name="below expectation">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Halt Below Expectation</ns4:content>
+                            <ns4:Delivery>
+<ns4:InTutor>
+    <ns4:TextEnhancement>NoEffect</ns4:TextEnhancement>
+    <ns4:MessagePresentation>TextOnly</ns4:MessagePresentation>
+</ns4:InTutor>
+                            </ns4:Delivery>
+                        </ns4:message>
+                        <ns4:teamRef value="Player1"/>
+                        <ns4:teamRef value="Player2"/>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="at expectation">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Halt At Expectation</ns4:content>
+                            <ns4:Delivery>
+<ns4:InTutor>
+    <ns4:TextEnhancement>NoEffect</ns4:TextEnhancement>
+    <ns4:MessagePresentation>TextOnly</ns4:MessagePresentation>
+</ns4:InTutor>
+                            </ns4:Delivery>
+                        </ns4:message>
+                        <ns4:teamRef value="Player1"/>
+                        <ns4:teamRef value="Player2"/>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+        </instructionalStrategies>
+    </actions>
+    <teamOrganization>
+        <team name="Everyone">
+            <teamMember name="Player1" playable="true">
+                <learnerId>
+                    <entityMarking>p1</entityMarking>
+                </learnerId>
+            </teamMember>
+            <teamMember name="Player2" playable="true">
+                <learnerId>
+                    <entityMarking>p2</entityMarking>
+                </learnerId>
+            </teamMember>
+        </team>
+    </teamOrganization>
+</Scenario>
