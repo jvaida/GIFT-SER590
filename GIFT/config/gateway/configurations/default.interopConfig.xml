@@ -23,12 +23,12 @@
                 <networkAddress>127.0.0.1</networkAddress>
             </VBS>
         </InteropInterfaceConfig>
-        <InteropInterfaceConfig refID="3">
+        <!-- <InteropInterfaceConfig refID="3">
             <available>true</available>
             <impl>gateway.interop.ppt.PPTInterface</impl>
             <name>Powerpoint Adapter</name>
             <PPT/>
-        </InteropInterfaceConfig>
+        </InteropInterfaceConfig> -->
         <InteropInterfaceConfig refID="4">
             <available>true</available>
             <impl>gateway.interop.tc3plugin.TC3PluginInterface</impl>

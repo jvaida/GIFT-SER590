@@ -19,18 +19,21 @@ COPY bin/gift-ums.jar /app/
 COPY bin/gift-ums-db.jar /app/
 COPY bin/legacyJsonMessageCodec.jar /app/
 
+
 # Copy config directory and start script
 COPY config/ /app/config/
 COPY startdb.sh /app/startdb.sh
-
+COPY derby.policy /app/derby.policy
 # Set environment variables for Java options
 ENV JAVA_OPTS="-Djava.awt.headless=true -Dcom.sun.management.jmxremote.port=7000 -Dcom.sun.management.jmxremote.rmi.port=7000 -Xmx1024m -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dgift.os.family=UNIX -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50000 -Djava.io.tmpdir=/app/temp"
 
 # Set the classpath environment variable
-ENV CLASSPATH="/app/gift-common.jar:/app/jaxb_generated.jar:/app/protobuf_generated.jar:/app/json_generated.jar:/app/gift-ums.jar:/app/gift-ums-db.jar:/app/legacyJsonMessageCodec.jar:/app/external/slf4j/*:/app/external/*:/app/external/activemq/activemq-all-5.18.3.jar:/app/external/hibernate/*:/app/external/jsonsimple/json_simple-1.1.jar:/app/external/db-derby-10.15.2.0-bin/lib/derbyclient.jar:/app/external/rapidminer/lib/*:/app/external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/nuxeo/*:/app/external/protobuf/bin/*:/app/external/jdk-11/jaxb-ri/mod/*:/app/external/zip4j-1.3.2/zip4j-1.2.3.jar:/app/external/derbyrun.jar"
+ENV CLASSPATH="/app/gift-common.jar:/app/jaxb_generated.jar:/app/protobuf_generated.jar:/app/json_generated.jar:/app/gift-ums.jar:/app/gift-ums-db.jar:/app/legacyJsonMessageCodec.jar:/app/external/slf4j/*:/app/external/activemq/activemq-all-5.18.3.jar:/app/external/hibernate/*:/app/external/jsonsimple/json_simple-1.1.jar:/app/external/rapidminer/lib/*:/app/external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/nuxeo/*:/app/external/protobuf/bin/*:/app/external/zip4j-1.3.2/zip4j-1.2.3.jar::/app/external/db-derby-10.15.2.0-bin/lib/*:/app/external/commons-cli-1.2.jar:/app/external/commons-lang-2.4.jar"
 
 # Make the script executable
 RUN chmod +x /app/startdb.sh
 
 # Run your application
 ENTRYPOINT ["/app/startdb.sh"]
+# /app/external/*:
+# /app/external/derby/*

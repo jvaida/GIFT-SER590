@@ -4,6 +4,9 @@ FROM openjdk:11-jre-slim
 # Set the working directory inside the Docker container
 WORKDIR /app
 
+# Install telnet and netcat for network troubleshooting
+RUN apt-get update && apt-get install -y telnet netcat && rm -rf /var/lib/apt/lists/*
+
 # Copy the application JAR files into /app
 COPY bin/gift-sensor.jar /app/
 COPY bin/gift-common.jar /app/
@@ -20,5 +23,5 @@ ENV CLASSPATH /app/gift-sensor.jar:/app/gift-common.jar:/app/jaxb_generated.jar:
 # Java options including library paths and system properties
 ENV JAVA_OPTS -Djava.awt.headless=true -Dcom.sun.management.jmxremote.port=7008 -Dcom.sun.management.jmxremote.rmi.port=7008 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dgift.os.family="UNIX" -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50008 -Djava.library.path=/app/external/jacob -Djava.io.tmpdir=/app/temp
 
-# The ENTRYPOINT has been updated to use the environment variables for CLASSPATH and JAVA_OPTS
+# The ENTRYPOINT uses the environment variables for CLASSPATH and JAVA_OPTS
 ENTRYPOINT java $JAVA_OPTS -cp $CLASSPATH mil.arl.gift.sensor.SensorModule

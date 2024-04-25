@@ -1,0 +1,4 @@
+grant {
+    // Allows all permissions to the Derby database
+    permission java.security.AllPermission;
+};
