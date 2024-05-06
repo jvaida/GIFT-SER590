@@ -31,16 +31,3 @@ C:\GIFT\tags\release_5.0_2014-2_08.01.2014\Training.Apps\SimpleExampleTrainingAp
 C:\GIFT\tags\release_5.0_2014-2_08.01.2014\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\SimpleExampleTrainingApplication.csproj.GenerateResource.Cache
 C:\GIFT\tags\release_5.0_2014-2_08.01.2014\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\ExampleTrainingApplication.exe
 C:\GIFT\tags\release_5.0_2014-2_08.01.2014\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\ExampleTrainingApplication.pdb
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Release\ExampleTrainingApplication.exe.config
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Release\ExampleTrainingApplication.exe
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Release\ExampleTrainingApplication.pdb
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Release\CookComputing.XmlRpcV2.dll
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Release\IStateName.dll
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\SimpleExampleTrainingApplication.csproj.AssemblyReference.cache
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\ExampleTrainingApplication.Form1.resources
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\ExampleTrainingApplication.Properties.Resources.resources
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\SimpleExampleTrainingApplication.csproj.GenerateResource.cache
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\SimpleExampleTrainingApplication.csproj.CoreCompileInputs.cache
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\SimpleEx.CCA2A83A.Up2Date
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\ExampleTrainingApplication.exe
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Release\ExampleTrainingApplication.pdb

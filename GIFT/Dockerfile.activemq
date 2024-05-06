@@ -7,12 +7,20 @@ WORKDIR /app
 # Install necessary packages including 'ps'
 RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 
+# Copy the health check script
+COPY check-activemq.sh /usr/local/bin/check-activemq.sh
+RUN chmod +x /usr/local/bin/check-activemq.sh
+
 # Copy the the below external dirs directory to the container
 COPY external/activemq /app/external/activemq
 COPY external/jetty-9.4.41 /app/external/jetty
 COPY external/protobuf /app/external/protobuf
 COPY external/jsonsimple /app/external/jsonsimple
 COPY external/vecmath.jar /app/external/
+COPY external/slf4j/* /app/external/slf4j/
+COPY external/commons-lang-2.4.jar /app/external/
+COPY external/commons-cli-1.2.jar /app/external/
+
 
 # Create a bin directory for JARs
 RUN mkdir -p /app/bin
@@ -22,13 +30,16 @@ COPY bin/gift-camel.jar /app/bin/
 COPY bin/gift-common.jar /app/bin/
 COPY bin/protobuf_generated.jar /app/bin/
 COPY bin/protobuf_generated_external_apps.jar /app/bin/
-
+COPY bin/gift-spl.jar /app/bin/
 COPY config /app/config
 # Expose necessary ports
 EXPOSE 61616 8161
 
-ENV CLASSPATH="/app/external/activemq/lib/*:/app/external/activemq/lib/web/*"
+
+ENV CLASSPATH="/app/external/activemq/lib/*:/app/external/activemq/lib/web/*:/app/bin/*:/app/external/slf4j/*:/app/external/*"
 
 # Set command to start ActiveMQ using the shell script with the entry point
 ENTRYPOINT ["/app/external/activemq/bin/linux-x86-64/activemq"]
 CMD ["console"]
+
+# ENTRYPOINT java $JAVA_OPTS -cp $CLASSPATH mil.arl.gift.tools.spl.SingleProcessLauncher activemq gas

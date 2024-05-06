@@ -7,14 +7,3 @@ D:\work\lite svn\trunk\Training.Apps\SimpleExampleTrainingApplication\ExampleTra
 D:\work\lite svn\trunk\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\SimpleExampleTrainingApplication.csproj.GenerateResource.Cache
 D:\work\lite svn\trunk\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\ExampleTrainingApplication.exe
 D:\work\lite svn\trunk\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\ExampleTrainingApplication.pdb
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Debug\ExampleTrainingApplication.exe.config
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Debug\ExampleTrainingApplication.exe
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\bin\Debug\ExampleTrainingApplication.pdb
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\SimpleExampleTrainingApplication.csproj.AssemblyReference.cache
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\ExampleTrainingApplication.Form1.resources
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\ExampleTrainingApplication.Properties.Resources.resources
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\SimpleExampleTrainingApplication.csproj.GenerateResource.cache
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\SimpleExampleTrainingApplication.csproj.CoreCompileInputs.cache
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\SimpleEx.CCA2A83A.Up2Date
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\ExampleTrainingApplication.exe
-D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\obj\x86\Debug\ExampleTrainingApplication.pdb

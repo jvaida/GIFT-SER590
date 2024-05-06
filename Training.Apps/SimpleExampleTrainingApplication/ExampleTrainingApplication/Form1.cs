@@ -64,10 +64,6 @@ namespace ExampleTrainingApplication
         /// <summary>
         /// Class constructor - build dialog, read properties and create XML-RPC server instance
         /// </summary>
-        /// 
-
-
-
         public Form1()
         {
             try
@@ -89,7 +85,6 @@ namespace ExampleTrainingApplication
             InitializeComponent();
 
             disableButtons();
-
         }
 
         public void disableButtons()
@@ -324,16 +319,12 @@ namespace ExampleTrainingApplication
                 //      I don't like this because when your running a GIFT course a prompt will appear for each lesson that launches this app.
                 String addressToUse = "localhost";
                 listener.Prefixes.Add("http://" + addressToUse + ":" + my_xml_rpc_server_port + "/");
-                listener.Prefixes.Add("http://" + "127.0.0.1"+ ":"+ my_xml_rpc_server_port + "/");
-
                 listener.Start();
-                // MessageBox.Show("Listener started successfully");
 
                 //listen for requests until told to stop
                 while (isRunning)
                 {
                     HttpListenerContext context = listener.GetContext();
-                    // MessageBox.Show($"Received request from {context.Request.RemoteEndPoint}");
                     ListenerService svc = new StateNameService(this);
                     svc.ProcessRequest(context);
                 }
@@ -341,7 +332,6 @@ namespace ExampleTrainingApplication
             }
             catch (Exception e)
             {
-                // MessageBox.Show($"Caught exception while running listener: {e}");
                 if (isRunning)
                 {
                     MessageBox.Show("Caught exception while running listener:\n" + e, "ERROR", MessageBoxButtons.OK);
@@ -448,26 +438,16 @@ namespace ExampleTrainingApplication
             this.form = form;
         }
 
-
         [XmlRpcMethod("load",
                 Description = "GIFT is providing a SIMAN load message with the course's load parameters.")]
         public String load(String scenarioName)
         {
-            try 
-            {
-                // MessageBox.Show($"load called with scenarioName: {scenarioName}");
-                //do something, in this case show some text on the dialog
-                form.updateReceiveListBox("load w/ scenario name of " + scenarioName);
+            //do something, in this case show some text on the dialog
+            form.updateReceiveListBox("load w/ scenario name of " + scenarioName);
 
-                form.enableButtons();
+            form.enableButtons();
 
-                return "success";
-            }
-            catch(Exception ex){
-                        MessageBox.Show($"Exception in load method: {ex}");
-                        throw;
-
-            }
+            return "success";
         }
 
         [XmlRpcMethod("blob",
@@ -605,7 +585,7 @@ namespace ExampleTrainingApplication
         /// It will allow this application to send content to GIFT via an XML-RPC call.
         /// </summary>
         /// <param name="content"></param>
-        [XmlRpcMethod("mil.arl.gift.gateway.interop.myplugin.MyPluginInterface$MyPluginXMLRPC.handleTrainingApplicationMessage")]
+        [XmlRpcMethod("mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationMessage")]
         void trainingApplicationStateMessage(String content);
 
         /// <summary>
@@ -613,7 +593,7 @@ namespace ExampleTrainingApplication
         /// It will allow this application to notify GIFT of a 'finished' condition via an XML-RPC call.
         /// </summary>
         /// <param name="content"></param>
-        [XmlRpcMethod("mil.arl.gift.gateway.interop.myplugin.MyPluginInterface$MyPluginXMLRPC.handleTrainingApplicationFinished")]
+        [XmlRpcMethod("mil.arl.gift.gateway.interop.simple.SimpleExampleTAPluginInterface$SimpleExampleTAPluginXMLRPC.handleTrainingApplicationFinished")]
         void trainingApplicationFinished();
 
         /// <summary>

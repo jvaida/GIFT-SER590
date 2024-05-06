@@ -5,12 +5,12 @@
 	<!--Properties are immutable and should never be initialized before being needed -->
 	
 	<!-- Define GIFT/ as basedir -->
-	<property name="BaseDir"           value="/mil"/>
+	<property name="BaseDir"           value="."/>
 	<property name="AbsBaseDir"        location="${BaseDir}"/>
 	<!-- Define the location of the GIFT temporary directory -->
 	<property name="GIFT_TEMP"         location="temp"/>
 	<!-- Note: The relative path to external folder is relative to GIFT/ -->
-	<property name="ExternalLibsDir"   value="/mil/external"/>
+	<property name="ExternalLibsDir"   value="${BaseDir}/external"/>
 	
 	<!-- Common location to define GIFT directories -->
 	<property name="DataDir"           		  value="${BaseDir}/data"/>
@@ -45,7 +45,7 @@
 			<property name="DomainDebugPort"            	value="50007"/>
 			<property name="DomainJmxArgs"             		value="-Dcom.sun.management.jmxremote.port=7007 -Dcom.sun.management.jmxremote.rmi.port=7007 ${BaseJmxArgs}"/>
 			<property name="DomainFindConversionWizardJars" value="true"/>
-			<property name="DomainClassPathExtension"       value="/mil/${ExternalLibsDir}/jetty-9.4.41/lib/*;${BinDir}/gift-commongwt.jar;${BinDir}/gift-authoring-conversion.jar;${BinDir}/gift-domain.jar;/mil/${ExternalLibsDir}/commons-codec-1.7.jar;${ExternalLibsDir}/redmine/httpcore-4.3.jar;${ExternalLibsDir}/redmine/httpclient-4.3.1.jar;/mil/${ExternalLibsDir}/gson-2.3.1.jar;${ExternalLibsDir}/lti/*;${ExternalLibsDir}/SuperCSV-with_src-1.52.jar;${ExternalLibsDir}/spiffy-with_source-all-0.05.jar;${BinDir}/gift-services.jar;${ExternalLibsDir}/nuxeo/*;${ExternalLibsDir}/protobuf/bin/*;${BinDir}/legacyJsonMessageCodec.jar;/mil/${ExternalLibsDir}/apache-poi-3.15/*;"/>
+			<property name="DomainClassPathExtension"       value="${ExternalLibsDir}/jetty-9.4.41/lib/*;${BinDir}/gift-commongwt.jar;${BinDir}/gift-authoring-conversion.jar;${BinDir}/gift-domain.jar;${ExternalLibsDir}/commons-codec-1.7.jar;${ExternalLibsDir}/redmine/httpcore-4.3.jar;${ExternalLibsDir}/redmine/httpclient-4.3.1.jar;${ExternalLibsDir}/gson-2.3.1.jar;${ExternalLibsDir}/lti/*;${ExternalLibsDir}/SuperCSV-with_src-1.52.jar;${ExternalLibsDir}/spiffy-with_source-all-0.05.jar;${BinDir}/gift-services.jar;${ExternalLibsDir}/nuxeo/*;${ExternalLibsDir}/protobuf/bin/*;${BinDir}/legacyJsonMessageCodec.jar;${ExternalLibsDir}/apache-poi-3.15/*;"/>
 			<property name="DomainLibraryPathExtension"     value="${ExternalLibsDir}/simile"/>
 		
 		<!-- Gateway module properties used to start gateway module -->
@@ -84,11 +84,11 @@
 			<property name="TutorName"                 		value="Tutor Web Server"/>
 			<property name="TutorDebugPort"            		value="50005"/>
 			<property name="TutorLibraryPathExtension" 		value=""/>
-			<property name="TutorWebServerConfig"      		value="/config/tutor/server"/>
+			<property name="TutorWebServerConfig"      		value="${BaseDir}/config/tutor/server"/>
 			<property name="TutorStopPort"             		value="9079"/>
 	        <property name="TutorStopKey"                     value="TutorStop"/>
 			<property name="TutorJmxArgs"              		value="-Dcom.sun.management.jmxremote.port=7005 -Dcom.sun.management.jmxremote.rmi.port=7005 ${BaseJmxArgs}"/>
-			<property name="TutorClassPathExtension"	    value="${AbsBaseDir}/gift-common.jar;${AbsBaseDir}/gift-commongwt.jar;${AbsBaseDir}/slf4j/*;${AbsBaseDir}/commons-fileupload-1.2.2.jar;${AbsBaseDir}/commons-io-2.3.jar;${AbsBaseDir}/commons-cli-1.2.jar;${AbsBaseDir}/commons-lang-2.4.jar;${AbsBaseDir}/jdk-11/jaxb-ri/mod/*;${AbsBaseDir}/arl/gift/common/gwt/server/GiftServletUtils"/>
+			<property name="TutorClassPathExtension"	    value="${AbsBaseDir}/${BinDir}/gift-common.jar;${AbsBaseDir}/${BinDir}/gift-commongwt.jar;${AbsBaseDir}/${ExternalLibsDir}/slf4j/*;${AbsBaseDir}/${ExternalLibsDir}/commons-fileupload-1.2.2.jar;${AbsBaseDir}/${ExternalLibsDir}/commons-io-2.3.jar;${AbsBaseDir}/${ExternalLibsDir}/commons-cli-1.2.jar;${AbsBaseDir}/${ExternalLibsDir}/commons-lang-2.4.jar;${AbsBaseDir}/${ExternalLibsDir}/jdk-11/jaxb-ri/mod/*"/>
 		
 		<!-- Learner module properties used to start the learner module -->
 			<property name="LearnerName"					value="Learner Console"/>
@@ -257,7 +257,7 @@
 	<!-- End of application extension definitions -->
 	
 	<!--Base java runtime classpath for all applications -->
-	<property name="JavaClasspath" value="/mil/${ExternalLibsDir}/slf4j/*;/mil/${ExternalLibsDir}/*;/mil/${ExternalLibsDir}/activemq/activemq-all-5.18.3.jar;/mil/${ExternalLibsDir}/hibernate/*;/mil/${ExternalLibsDir}/jsonsimple/json_simple-1.1.jar;/mil/${DERBY_HOME}/lib/derbyclient.jar;${BinDir}/gift-common.jar;/mil/${ExternalLibsDir}/rapidminer/lib/*;/mil/${ExternalLibsDir}/rapidminer/lib/plugins/rmx_weka-5.3.1.jar;/mil/${ExternalLibsDir}/apache-xmlrpc-3.1.3/lib/*;/mil/${ExternalLibsDir}/nuxeo/*;${BinDir}/jaxb_generated.jar;${BinDir}/protobuf_generated.jar;/mil/${ExternalLibsDir}/protobuf/bin/*;/mil/${ExternalLibsDir}/jdk-11/jaxb-ri/mod/*;${AbsBaseDir}/${ExternalLibsDir}/zip4j-1.3.2/zip4j-1.3.2.jar;${BinDir}/json_generated.jar;"/>
+	<property name="JavaClasspath" value="${ExternalLibsDir}/slf4j/*;${ExternalLibsDir}/*;${ExternalLibsDir}/activemq/activemq-all-5.18.3.jar;${ExternalLibsDir}/hibernate/*;${ExternalLibsDir}/jsonsimple/json_simple-1.1.jar;${DERBY_HOME}/lib/derbyclient.jar;${BinDir}/gift-common.jar;${ExternalLibsDir}/rapidminer/lib/*;${ExternalLibsDir}/rapidminer/lib/plugins/rmx_weka-5.3.1.jar;${ExternalLibsDir}/apache-xmlrpc-3.1.3/lib/*;${ExternalLibsDir}/nuxeo/*;${BinDir}/jaxb_generated.jar;${BinDir}/protobuf_generated.jar;${ExternalLibsDir}/protobuf/bin/*;${ExternalLibsDir}/jdk-11/jaxb-ri/mod/*;${AbsBaseDir}/${ExternalLibsDir}/zip4j-1.3.2/zip4j-1.3.2.jar;${BinDir}/json_generated.jar;"/>
 	
 	<!-- single process launcher has a slf4j library inside activemq that is used over the one in external folder -->
 	<property name="SPLJavaClasspath" value="${ExternalLibsDir}/*;${ExternalLibsDir}/activemq/activemq-all-5.18.3.jar;${ExternalLibsDir}/hibernate/*;${ExternalLibsDir}/jsonsimple/json_simple-1.1.jar;${DERBY_HOME}/lib/derbyclient.jar;${BinDir}/gift-common.jar;${ExternalLibsDir}/rapidminer/lib/*;${ExternalLibsDir}/rapidminer/lib/plugins/rmx_weka-5.3.1.jar;${ExternalLibsDir}/apache-xmlrpc-3.1.3/lib/*;${ExternalLibsDir}/nuxeo/*;${BinDir}/jaxb_generated.jar;${BinDir}/protobuf_generated.jar;${ExternalLibsDir}/protobuf/bin/*;${BinDir}/json_generated.jar;"/>
@@ -306,8 +306,8 @@
 		<!-- NOTE: Both platforms must use the same path to the JDK because of the reference to modules JAXB and JAF within the JDK. Without 
                    this, it would be required that separate Linux and Windows JDK paths to the modules be maintained. -->
 		<!-- TODO: Need to check for 64-bit processor and change JDK accordingly -->
-				<!-- <property name="JvmPath" value="${ExternalLibsDir}/jdk-11/bin/java"/> -->
-				<property name="JvmPath" value="/mil/external/jdk-11/bin/java"/>
+		<property name="JvmPath" value="${ExternalLibsDir}/jdk-11/bin/java"/>
+		
 		<!-- If launching from a Windows platform, use javaw.exe to launch SPL minimized. -->
 		<condition property="QuietJvmPath" value="${ExternalLibsDir}/jdk-11/bin/javaw" else="${JvmPath}">
 	        <istrue value="${isWindows}"/>
@@ -317,92 +317,6 @@
 		<property name="QuietJvmPathLoc" location="${QuietJvmPath}"/>
 		
 	</target>
-
-
-
-<target name="splgas" depends="system32PathCheck, vbsFileAssocCheck, supportedPlatformCheck, startSPLgas"/>
-<target name="startSPLgas" if="isStarting">
-	<property name="Name"                 		value="${SPLName}"/>
-	<property name="Class"                		value="${SPLClass}"/>
-	<property name="DebugPort"            		value="${SPLDebugPort}"/>
-	<property name="JavaArgs"             		value="${SPLJavaArgs}"/>
-	<property name="ClasspathExtension"   		value="${SPLClassPathExtention}"/>
-	<property name="LibraryPathExtension" 		value="${SPLLibraryPathExtension}"/>
-	<property name="shouldLaunchDerbyServer"   	value="${SPLshouldLaunchDerbyServer}"/>
-	<property name="needUMSDb"            		value="${SPLneedUMSDb}"/>
-	<property name="needLMSDb"            		value="${SPLneedLMSDb}"/>
-	<property name="JmxArgs"              		value="${SPLJmxArgs}"/>
-	<antcall target="launchSPLgas"/>
-</target>
-
-<target name="launchSPLgas" if="isStarting" depends="checkDebug, launchDerby, addConvWizardJars, !addConvWizardJars">
-		<echo message="Debug Args ${JavaDebugArgs} ${convWizardJars}"/>
-	        <condition property="Executable" value="cmd" else="/bin/bash">
-	            <istrue value="${isWindows}"/>
-	        </condition>
-            <pathconvert property="classpath">
-                <path>
-                    <pathelement path="${SPLJavaClasspath};${ClasspathExtension};${convWizardJars}"/>
-                </path>
-                <map from="${AbsBaseDir}" to="."/>
-            </pathconvert>
-            <pathconvert property="libraryPath">
-                <path>
-                    <pathelement path="${LibraryPathExtension};"/>
-                </path>
-                <map from="${AbsBaseDir}" to="."/>
-            </pathconvert>
-			<property name='PlatformArgs' value="-Dgift.os.family=&quot;${gift.os.family}&quot;"/>
-			<property name="JavaCmdLine" 
-				value='${JmxArgs} ${JavaArgs} ${PlatformArgs} ${JavaDebugArgs} -classpath "${classpath}" -Djava.library.path="${libraryPath}" -Dderby.stream.error.field="output/logger/derby.log" -Djava.io.tmpdir="${GIFT_TEMP}" "${ActiveMQHome}" "${ActiveMQBase}" ${Class} gas activemq'/>
-			<property name="Command" value='start "GIFT" "${QuietJvmPathLoc}" ${JavaCmdLine}'/>
-			<antcall target="runCommand"/>
-	</target>
-
-	<target name="splums" depends="system32PathCheck, vbsFileAssocCheck, supportedPlatformCheck, startSPLums"/>
-<target name="startSPLums" if="isStarting">
-	<property name="Name"                 		value="${SPLName}"/>
-	<property name="Class"                		value="${SPLClass}"/>
-	<property name="DebugPort"            		value="${SPLDebugPort}"/>
-	<property name="JavaArgs"             		value="${SPLJavaArgs}"/>
-	<property name="ClasspathExtension"   		value="${SPLClassPathExtention}"/>
-	<property name="LibraryPathExtension" 		value="${SPLLibraryPathExtension}"/>
-	<property name="shouldLaunchDerbyServer"   	value="${SPLshouldLaunchDerbyServer}"/>
-	<property name="needUMSDb"            		value="${SPLneedUMSDb}"/>
-	<property name="needLMSDb"            		value="${SPLneedLMSDb}"/>
-	<property name="JmxArgs"              		value="${SPLJmxArgs}"/>
-	<antcall target="launchSPLums"/>
-</target>
-
-<target name="launchSPLums" if="isStarting" depends="checkDebug, launchDerby, addConvWizardJars, !addConvWizardJars">
-		<echo message="Debug Args ${JavaDebugArgs} ${convWizardJars}"/>
-	        <condition property="Executable" value="cmd" else="/bin/bash">
-	            <istrue value="${isWindows}"/>
-	        </condition>
-            <pathconvert property="classpath">
-                <path>
-                    <pathelement path="${SPLJavaClasspath};${ClasspathExtension};${convWizardJars}"/>
-                </path>
-                <map from="${AbsBaseDir}" to="."/>
-            </pathconvert>
-            <pathconvert property="libraryPath">
-                <path>
-                    <pathelement path="${LibraryPathExtension};"/>
-                </path>
-                <map from="${AbsBaseDir}" to="."/>
-            </pathconvert>
-			<property name='PlatformArgs' value="-Dgift.os.family=&quot;${gift.os.family}&quot;"/>
-			<property name="JavaCmdLine" 
-				value='${JmxArgs} ${JavaArgs} ${PlatformArgs} ${JavaDebugArgs} -classpath "${classpath}" -Djava.library.path="${libraryPath}" -Dderby.stream.error.field="output/logger/derby.log" -Djava.io.tmpdir="${GIFT_TEMP}" "${ActiveMQHome}" "${ActiveMQBase}" ${Class}  ums'/>
-			<property name="Command" value='start "GIFT" "${QuietJvmPathLoc}" ${JavaCmdLine}'/>
-			<antcall target="runCommand"/>
-	</target>
-
-
-
-
-
-
 
 	<!-- This target is called when using launchProcess.bat and verifies the remaining command line arguments.
 		The first <or> block contains all valid applications and any new applications should be added here in addition
@@ -953,7 +867,7 @@
 		<property name='PlatformArgs' value="-Dgift.os.family=&quot;${gift.os.family}&quot;"/>
 	        
 		<property name="JavaCmdLine" 
-	    	value='-Djava.awt.headless=true ${JmxArgs} ${JavaArgs} ${PlatformArgs} ${JavaDebugArgs} -classpath "${classpath}" -Djava.library.path="${libraryPath}" -Djava.io.tmpdir="${GIFT_TEMP}" ${Class}'/>
+	    	value='${JmxArgs} ${JavaArgs} ${PlatformArgs} ${JavaDebugArgs} -classpath "${classpath}" -Djava.library.path="${libraryPath}" -Djava.io.tmpdir="${GIFT_TEMP}" ${Class}'/>
         
 		<!-- Construct the final command to pass to runCommand.bat when launching Java -->
 		<property name="Command" value='"${JvmPathLoc}" ${JavaCmdLine}'/>
@@ -994,7 +908,7 @@
 	<!-- runs the assembled command to start an application in unix using a main class -->
 	<target name="runCommandLinuxClass" if="Class">
 		<echo message="Linux based OS detected"/>
-		<echo message="yo vjk, this is the JavaCmldLine ${JavaCmdLine}" />
+		
 		<!-- 
            Executes a Java task to start a GIFT application based on its main class
         -->
@@ -1006,7 +920,7 @@
 	<!-- runs the assembled command to start an application in unix using a main JAR -->
 	<target name="runCommandLinuxJar" unless="Class">
         <echo message="Linux based OS detected"/>
-		<echo message="yo vjk, this is the JavaCmldLine ${JavaCmdLine}" />
+        
 		<!-- 
            Executes a GIFT Java task using the Java executable in GIFT/external directly
            

@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  activemq:
+    build:
+      context: .
+      dockerfile: Dockerfile.activemq
+    container_name: activemq
+    network_mode: host
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/check-activemq.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  sensor:
+    build:
+      context: .
+      dockerfile: Dockerfile.sensor1
+    container_name: sensor
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+
+  ums:
+    build:
+      context: .
+      dockerfile: Dockerfile.ums1
+    container_name: ums
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/check-derby.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  lms:
+    build:
+      context: .
+      dockerfile: Dockerfile.lms1
+    container_name: lms
+    depends_on:
+      activemq:
+        condition: service_healthy
+      # ums:
+      #   condition: service_healthy
+    network_mode: host
+
+  domain:
+    build:
+      context: .
+      dockerfile: Dockerfile.domain1
+    container_name: domain
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway1
+    container_name: gateway
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+
+  tutor:
+    build:
+      context: .
+      dockerfile: Dockerfile.tutor1
+    container_name: tutor
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+
+  ped:
+    build:
+      context: .
+      dockerfile: Dockerfile.ped1
+    container_name: ped
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+
+  learner:
+    build:
+      context: .
+      dockerfile: Dockerfile.learner1
+    container_name: learner
+    depends_on:
+      activemq:
+        condition: service_healthy
+    network_mode: host
+
+  gas:
+    build:
+      context: .
+      dockerfile: Dockerfile.gas
+    container_name: gas
+    depends_on:
+      activemq:
+        condition: service_healthy
+      ped:
+        condition: service_started
+      domain:
+        condition: service_started
+      sensor:
+        condition: service_started
+      gateway:
+        condition: service_started
+      ums:
+        condition: service_started
+      tutor:
+        condition: service_started
+      learner:
+        condition: service_started
+    network_mode: host

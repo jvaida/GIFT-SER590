@@ -4,14 +4,21 @@ FROM openjdk:11-jre-slim
 # Set the working directory inside the Docker container
 WORKDIR /app
 
+# Install libfreetype6 for font management
+RUN apt-get update && apt-get install -y libfreetype6 fontconfig && rm -rf /var/lib/apt/lists/*
+
 # Copy the necessary JAR files into the container, assuming these are not included in the mounted external libraries
 COPY bin/gift-common.jar /app/
 COPY bin/gift-commongwt.jar /app/
-COPY bin/gift-tutor.war /app/
+COPY bin/gift-tutor.war /app/bin/
+
+# Copy external directories and files
 COPY external/commons-fileupload-1.2.2.jar /app/
 COPY external/commons-io-2.3.jar /app/
 COPY external/commons-cli-1.2.jar /app/
 COPY external/commons-lang-2.4.jar /app/
+COPY external/jetty-9.4.41/ /app/external/jetty-9.4.41/
+COPY external/slf4j/ /app/external/slf4j/
 
 # Copy config directory
 COPY config/ /app/config/

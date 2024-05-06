@@ -197,7 +197,6 @@ public class MessageTypeEnum extends AbstractEnum {
      * Simulation messages
      */
     public static final MessageTypeEnum ENTITY_STATE            = new MessageTypeEnum("EntityState", "Entity State", "Contains state information about an Entity in a training application (e.g. location, orientation, velocity, appearance) .");
-    public static final MessageTypeEnum EXAMPLE_GAME_STATE = new MessageTypeEnum("ExampleGameState", "Example Game State");
     public static final MessageTypeEnum COLLISION               = new MessageTypeEnum("Collision", "Collision", "Contains information about a collision between two objects in a training application (e.g. entity identifiers, location, velocity, mass) .");
     public static final MessageTypeEnum REMOVE_ENTITY           = new MessageTypeEnum("RemoveEntity", "Remove Entity", "Used to remove an entity from an exercise or training application.");
     public static final MessageTypeEnum DETONATION              = new MessageTypeEnum("Detonation",  "Detonation", "Contains information about the detonation of a munition (e.g. location, velocity, target entity info).");

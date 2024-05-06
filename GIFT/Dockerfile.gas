@@ -1,0 +1,37 @@
+# Use an OpenJDK 11 base image
+FROM openjdk:11-jre-slim
+
+# Set the working directory inside the Docker container
+WORKDIR /app
+
+# Install necessary packages, including tools required for network troubleshooting if needed
+RUN apt-get update && apt-get install -y procps netcat && rm -rf /var/lib/apt/lists/*
+
+# Copy the necessary JAR files into the container
+COPY bin/gift-common.jar /app/
+COPY bin/json_generated.jar /app/
+COPY bin/gift-commongwt.jar /app/
+COPY bin/gift-dashboard.war /app/bin/
+
+# Copy external libraries
+COPY external/slf4j/* /app/external/slf4j/
+COPY external/activemq/activemq-all-5.18.3.jar /app/external/activemq/
+COPY external/jdk-11/jaf-1.1.1/activation.jar /app/external/jdk-11/jaf-1.1.1/
+COPY external/jdk-11/jaxb-ri/mod/* /app/external/jdk-11/jaxb-ri/mod/
+COPY external/lms/* /app/external/lms/
+COPY external/jacob/* /app/external/jacob/
+COPY external/simile/* /app/external/simile/
+COPY external/jetty-9.4.41/ /app/external/jetty-9.4.41/
+COPY external/commons-fileupload-1.2.2.jar /app/
+COPY external/mil-sym-service-0.1.35.war /app/external/mil-sym-service-0.1.35.war
+# Copy config directory
+COPY config/ /app/config/
+COPY temp/ /app/temp/
+
+# Set environment variables for Java options, including library paths and other system properties
+ENV JAVA_OPTS="-Xmx1024m -Dcom.sun.management.jmxremote.port=7009 -Dcom.sun.management.jmxremote.rmi.port=7009 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dgift.os.family=UNIX -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50009 -Djava.library.path=/app/external/jacob:/app/external/simile -Djava.io.tmpdir=/app/temp -Dgift.home=/app -Dderby.system.home=/app/data -Dlog4j1.compatibility=true -DSTOP.PORT=8079 -DSTOP.KEY=GasStop"
+
+ENV CLASSPATH="/app/gift-common.jar:/app/gift-commongwt.jar:/app/commons-fileupload-1.2.2.jar:/app/bin/*:/app/external/slf4j/*:/app/external/activemq/*:/app/external/jdk-11/jaf-1.1.1/*:/app/external/jdk-11/jaxb-ri/mod/*:/app/external/lms/*"
+
+# Command to run the application
+ENTRYPOINT java $JAVA_OPTS -jar /app/external/jetty-9.4.41/start.jar jetty.base="/app/config/tools/gas" --lib="$CLASSPATH"

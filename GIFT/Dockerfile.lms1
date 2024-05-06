@@ -20,11 +20,25 @@ COPY bin/gift-lms.jar /app/
 # Copy config directory
 COPY config/ /app/config/
 
+# Copy external directories and files
+COPY external/activemq/activemq-all-5.18.3.jar /app/external/activemq/
+COPY external/db-derby-10.15.2.0-bin/lib/* /app/external/db-derby/lib/
+COPY external/jetty-9.4.41/lib/* /app/external/jetty/
+COPY external/rapidminer/lib/* /app/external/rapidminer/
+COPY external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar /app/external/rapidminer/plugins/
+COPY external/slf4j/* /app/external/slf4j/
+COPY external/commons-cli-1.2.jar /app/external/
+COPY external/commons-lang-2.4.jar /app/external/
+COPY external/jsonsimple/json_simple-1.1.jar /app/external/
+COPY external/jdk-11/jaxb-ri/ /app/external/jdk-11/jaxb-ri/
+COPY external/hibernate/* /app/external/hibernate/
+COPY external/protobuf/bin/* /app/external/protobuf/bin/
+
 # Set environment variables for Java options
 ENV JAVA_OPTS="-Djava.awt.headless=true -Dcom.sun.management.jmxremote.port=7001 -Dcom.sun.management.jmxremote.rmi.port=7001 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dderby.system.home=/app/data -Dgift.os.family=UNIX -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:50001 -Djava.io.tmpdir=/app/temp"
 
 # Set the classpath environment variable
-ENV CLASSPATH="/app/gift-common.jar:/app/jaxb_generated.jar:/app/protobuf_generated.jar:/app/json_generated.jar:/app/gift-lms.jar:/app/external/slf4j/*:/app/external/activemq/activemq-all-5.18.3.jar:/app/external/hibernate/*:/app/external/jsonsimple/json_simple-1.1.jar:/app/external/db-derby-10.15.2.0-bin/lib/*:/app/external/rapidminer/lib/*:/app/external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/nuxeo/*:/app/external/protobuf/bin/*:/app/external/jdk-11/jaxb-ri/mod/*:/app/external/zip4j-1.3.2/zip4j-1.3.2.jar:/app/external/jetty-9.4.41/lib/*:/app/external/lms/*:/app/external/commons-cli-1.2.jar:/app/external/commons-lang-2.4.jar"
+ENV CLASSPATH="/app/gift-common.jar:/app/jaxb_generated.jar:/app/protobuf_generated.jar:/app/json_generated.jar:/app/gift-lms.jar:/app/external/slf4j/*:/app/external/activemq/activemq-all-5.18.3.jar:/app/external/hibernate/*:/app/external/jsonsimple/json_simple-1.1.jar:/app/external/db-derby/lib/*:/app/external/rapidminer/lib/*:/app/external/rapidminer/lib/plugins/rmx_weka-5.3.1.jar:/app/external/apache-xmlrpc-3.1.3/lib/*:/app/external/nuxeo/*:/app/external/protobuf/bin/*:/app/external/jdk-11/jaxb-ri/mod/*:/app/external/zip4j-1.3.2/zip4j-1.3.2.jar:/app/external/jetty-9.4.41/lib/*:/app/external/lms/*:/app/external/commons-cli-1.2.jar:/app/external/commons-lang-2.4.jar"
 
 # Run your application
 ENTRYPOINT java $JAVA_OPTS -cp $CLASSPATH mil.arl.gift.lms.LmsModule

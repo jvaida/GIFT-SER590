@@ -60,7 +60,7 @@ fi
 
 # Now use $1 and $2 to dynamically accept arguments from CMD
 echo "Launching the GIFT $2 module with arguments $1 $2..."
-ant -f /mil/launch/launchProcess.xml $1 $2
+ant -f /mil/config/launchProcess.xml $1 $2
 
 ERROR_CODE=$?
 if [ ${ERROR_CODE} != 0 ]; then

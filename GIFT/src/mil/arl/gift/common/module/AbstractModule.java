@@ -1137,10 +1137,12 @@ public abstract class AbstractModule {
 	            BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 	            String input = null;
 	            do {
-	                System.out.print("\nPress Enter to close this module.\n");
+	                // System.out.print("\nPress Enter to close this module.\n");
 	                input = inputReader.readLine();
 
-	            } while (input != null && input.length() != 0);
+	            } while (true
+                    // input != null && input.length() != 0
+                    );
 	        } catch (Exception e) {
 	            System.err.println("Caught exception while reading input: \n");
 	            e.printStackTrace();

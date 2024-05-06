@@ -1,9 +1,0 @@
-4/3/2024 12:12:17 PM: Listener started successfully
-4/3/2024 12:44:59 PM: Listener started successfully
-4/3/2024 12:45:14 PM: Caught exception while running listener: System.Net.HttpListenerException: The I/O operation has been aborted because of either a thread exit or an application request
-   at System.Net.HttpListener.GetContext()
-   at ExampleTrainingApplication.Form1.startThread() in D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\Form1.cs:line 328
-4/3/2024 12:56:54 PM: Listener started successfully
-4/3/2024 12:57:02 PM: Caught exception while running listener: System.Net.HttpListenerException: The I/O operation has been aborted because of either a thread exit or an application request
-   at System.Net.HttpListener.GetContext()
-   at ExampleTrainingApplication.Form1.startThread() in D:\GIFT_2023-1\release_2023-1\Training.Apps\SimpleExampleTrainingApplication\ExampleTrainingApplication\Form1.cs:line 343
