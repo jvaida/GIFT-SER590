@@ -30,8 +30,7 @@ check_derby_server
 echo "Starting UMSModule..."
 java $JAVA_OPTS -cp $CLASSPATH mil.arl.gift.ums.UMSModule
 
-# Check if UMSModule started successfully (you might need to add checks similar to Derby)
-# Here we assume that if it fails, it will exit non-zero status
+
 if [ $? -ne 0 ]; then
     echo "UMSModule failed to start."
     exit 1

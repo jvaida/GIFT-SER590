@@ -20,22 +20,22 @@ COPY config/ /app/config/
 
 COPY bin/war /app/bin/war/
 
-COPY Training.Apps/ /app/Training.Apps
-RUN mkdir -p /Training.Apps/SimpleExampleTrainingApplication && ln -s /app/Training.Apps/SimpleExampleTrainingApplication Training.Apps/SimpleExampleTrainingApplication
-RUN mkdir -p /Training.Apps/Util && ln -s /app/Training.Apps/Util Training.Apps/Util
-RUN mkdir -p /Training.Apps/VBS && ln -s /app/Training.Apps/VBS Training.Apps/VBS
-RUN mkdir -p /Training.Apps/VR-Engage && ln -s /app/Training.Apps/VR-Engage Training.Apps/VR-Engage
-RUN mkdir -p /Training.Apps/WrapResources && ln -s /app/Training.Apps/WrapResources Training.Apps/WrapResources
+COPY Training.Apps/ /Training.Apps/
+# RUN mkdir -p /Training.Apps/SimpleExampleTrainingApplication && ln -s /app/Training.Apps/SimpleExampleTrainingApplication Training.Apps/SimpleExampleTrainingApplication
+# RUN mkdir -p /Training.Apps/Util && ln -s /app/Training.Apps/Util Training.Apps/Util
+# RUN mkdir -p /Training.Apps/VBS && ln -s /app/Training.Apps/VBS Training.Apps/VBS
+# RUN mkdir -p /Training.Apps/VR-Engage && ln -s /app/Training.Apps/VR-Engage Training.Apps/VR-Engage
+# RUN mkdir -p /Training.Apps/WrapResources && ln -s /app/Training.Apps/WrapResources Training.Apps/WrapResources
 
 #Copy Domain directory and create a symbolic link for /Domain/runtime
-COPY Domain/ /app/Domain/
-RUN mkdir -p /Domain/runtime && ln -s /app/Domain/runtime /Domain/runtime
-RUN mkdir -p /Domain/Experiments && ln -s /app/Domain/Experiments /Domain/Experiments
-RUN mkdir -p /Domain/Exports && ln -s /app/Domain/Exports /Domain/Exports
-RUN mkdir -p /Domain/Imports && ln -s /app/Domain/Imports /Domain/Imports
-RUN mkdir -p /Domain/resources && ln -s /app/Domain/resources /Domain/resources
-RUN mkdir -p /Domain/temp && ln -s /app/Domain/temp /Domain/temp
-RUN mkdir -p /Domain/workspace && ln -s /app/Domain/workspace /Domain/workspace
+COPY Domain/ /Domain/
+# RUN mkdir -p /Domain/runtime && ln -s /app/Domain/runtime /Domain/runtime
+# RUN mkdir -p /Domain/Experiments && ln -s /app/Domain/Experiments /Domain/Experiments
+# RUN mkdir -p /Domain/Exports && ln -s /app/Domain/Exports /Domain/Exports
+# RUN mkdir -p /Domain/Imports && ln -s /app/Domain/Imports /Domain/Imports
+# RUN mkdir -p /Domain/resources && ln -s /app/Domain/resources /Domain/resources
+# RUN mkdir -p /Domain/temp && ln -s /app/Domain/temp /Domain/temp
+# RUN mkdir -p /Domain/workspace && ln -s /app/Domain/workspace /Domain/workspace
 
 # Copy specific external directories and files
 COPY external/slf4j/ /app/external/slf4j/

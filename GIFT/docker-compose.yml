@@ -109,6 +109,8 @@ services:
       context: .
       dockerfile: Dockerfile.gas
     container_name: gas
+    volumes:
+      - ./output:/app/output
     depends_on:
       activemq:
         condition: service_healthy
