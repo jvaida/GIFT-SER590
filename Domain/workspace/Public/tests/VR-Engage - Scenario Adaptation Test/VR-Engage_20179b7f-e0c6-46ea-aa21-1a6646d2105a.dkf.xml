@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="Real-time Assessment" version="11.0.1">
+    <description>This is the simplest DKF that can be used by most training applications.  It only contains 1 condition, the Application Completed Condition, which when triggered will end the domain assessment and therefore the Training Application course element.</description>
+    <resources>
+        <ns2:surveyContext>4</ns2:surveyContext>
+        <AvailableLearnerActions/>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Application Completed Task" nodeId="1">
+                <endTriggers>
+                    <trigger>
+                        <childConceptEnded nodeId="2"/>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Application Completed" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.ApplicationCompletedCondition</conditionImpl>
+<input>
+    <ApplicationCompletedCondition/>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                </concepts>
+            </task>
+        </tasks>
+        <objects>
+            <PlacesOfInterest/>
+        </objects>
+    </assessment>
+    <actions>
+        <stateTransitions/>
+        <instructionalStrategies>
+            <strategy name="Teleport team to side door">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:teleport>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>-5506980.752014</ns2:x>
+    <ns2:y>-2240679.622543</ns2:y>
+    <ns2:z>2301621.628364</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                            <ns4:heading value="23"/>
+                            <ns4:teamMemberRef value="Leader">
+<ns4:entityMarking>FT1_Leader</ns4:entityMarking>
+                            </ns4:teamMemberRef>
+                        </ns4:teleport>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:teleport>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>-5506981.607930</ns2:x>
+    <ns2:y>-2240678.257396</ns2:y>
+    <ns2:z>2301620.895107</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                            <ns4:heading value="35"/>
+                            <ns4:teamMemberRef value="Gunner 1">
+<ns4:entityMarking>FT1_Gunner1</ns4:entityMarking>
+                            </ns4:teamMemberRef>
+                        </ns4:teleport>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:teleport>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>-5506980.957181</ns2:x>
+    <ns2:y>-2240680.873787</ns2:y>
+    <ns2:z>2301619.599477</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                            <ns4:heading value="2"/>
+                            <ns4:teamMemberRef value="Gunner 2">
+<ns4:entityMarking>FT1_Gunner2</ns4:entityMarking>
+                            </ns4:teamMemberRef>
+                        </ns4:teleport>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Teleport leader to front door">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:teleport>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>-5506974.749269</ns2:x>
+    <ns2:y>-2240666.957405</ns2:y>
+    <ns2:z>2301647.728547</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                            <ns4:heading value="110"/>
+                            <ns4:teamMemberRef value="Leader">
+<ns4:entityMarking>FT1_Leader</ns4:entityMarking>
+                            </ns4:teamMemberRef>
+                        </ns4:teleport>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="0% Fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:fog density="0">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:fog>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="50% Blue fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:fog density="0.5">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                            <ns4:color red="0" green="0" blue="255"/>
+                        </ns4:fog>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="75% Red fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:fog density="0.75">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                            <ns4:color red="255" green="0" blue="0"/>
+                        </ns4:fog>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="100% Green fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:fog density="1">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                            <ns4:color red="128" green="255" blue="0"/>
+                        </ns4:fog>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="0% Overcast">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:overcast value="0">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:overcast>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="33% Overcast">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:overcast value="0.33">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:overcast>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="67% Overcast">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:overcast value="0.67">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:overcast>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="100% Overcast">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:overcast value="1">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:overcast>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="0% Rain">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:rain value="0">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:rain>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="33% Rain">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:rain value="0.33">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:rain>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="67% Rain">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:rain value="0.67">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:rain>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="100% Rain">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:rain value="1">
+                            <ns4:scenarioAdaptationDuration>0</ns4:scenarioAdaptationDuration>
+                        </ns4:rain>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Time - 2:00">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:timeOfDay>
+                            <ns4:midday/>
+                        </ns4:timeOfDay>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Time - 8:00">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:timeOfDay>
+                            <ns4:dusk/>
+                        </ns4:timeOfDay>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Time - 14:00">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:timeOfDay>
+                            <ns4:midnight/>
+                        </ns4:timeOfDay>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Time - 22:00">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:timeOfDay>
+                            <ns4:dawn/>
+                        </ns4:timeOfDay>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Run enemy patrol script">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:script>
+                            <ns4:value>enemy_patrol</ns4:value>
+                        </ns4:script>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Create 2 enemies in hallways">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:createActors>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>-5506969.409582</ns2:x>
+    <ns2:y>-2240684.909595</ns2:y>
+    <ns2:z>2301643.192707</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                            <ns4:type>3:1:159:102:5:112:3</ns4:type>
+                            <ns4:side>
+<ns4:opfor/>
+                            </ns4:side>
+                        </ns4:createActors>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:createActors>
+                            <ns2:coordinate>
+<ns2:GCC>
+    <ns2:x>-5506980.699611</ns2:x>
+    <ns2:y>-2240681.763985</ns2:y>
+    <ns2:z>2301627.657486</ns2:z>
+</ns2:GCC>
+                            </ns2:coordinate>
+                            <ns4:type>3:1:159:102:5:112:3</ns4:type>
+                            <ns4:side>
+<ns4:opfor/>
+                            </ns4:side>
+                        </ns4:createActors>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Remove enemy on 1st floor">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:removeActors>
+                            <ns4:actorName>BldgEnemy1</ns4:actorName>
+                        </ns4:removeActors>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="Remove enemy on 2nd floor">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:removeActors>
+                            <ns4:actorName>BldgEnemy2</ns4:actorName>
+                        </ns4:removeActors>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="custom script fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:script>
+                            <ns4:value>vrf:setVisibilityDistance(vrf:getGlobalWeather(), 50)</ns4:value>
+                        </ns4:script>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+        </instructionalStrategies>
+    </actions>
+    <teamOrganization>
+        <team name="Everyone">
+            <team name="Fire Team 1">
+                <teamMember name="Leader" playable="true">
+                    <learnerId>
+                        <entityMarking>FT1_Leader</entityMarking>
+                    </learnerId>
+                </teamMember>
+                <teamMember name="Gunner 1" playable="true">
+                    <learnerId>
+                        <entityMarking>FT1_Gunner1</entityMarking>
+                    </learnerId>
+                </teamMember>
+                <teamMember name="Gunner 2" playable="true">
+                    <learnerId>
+                        <entityMarking>FT1_Gunner2</entityMarking>
+                    </learnerId>
+                </teamMember>
+            </team>
+        </team>
+    </teamOrganization>
+</Scenario>

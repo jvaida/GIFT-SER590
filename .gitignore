@@ -1,9 +1,5 @@
-/.vscode
-/Domain
-/GIFT/bin
-/GIFT/build
-/GIFT/external
-/GIFT/output
-/GIFT/api-docs
-/GIFT/temp
-/GIFT/data
+/GIFT/bin/*
+/GIFT/build/*
+/GIFT/external/*
+/GIFT/output/*
+/GIFT/temp/*

@@ -1,0 +1,2 @@
+Fri May 17 18:06:35 MST 2024 : Could not listen on port 1527 on host 0.0.0.0:
+ java.net.BindException: Address already in use: NET_Bind

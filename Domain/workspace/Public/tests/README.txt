@@ -1,0 +1,1 @@
+This directory contains domain content used for testing purposes.

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Course xmlns:ns2="http://GIFT.com/common" name="VR-Engage - Scenario Adaptation Test" version="11.0.1">
+    <ns2:surveyContext>4</ns2:surveyContext>
+    <transitions>
+        <Guidance>
+            <transitionName>Example Guidance</transitionName>
+            <message>
+                <content>&lt;p style="font-family: Arial; font-size: 20px; text-align: center;"&gt;Welcome to GIFT!&lt;br&gt;&lt;br&gt;This is an example of a "Guidance" transition authored using the GIFT Authoring Tool (GAT)&lt;br&gt;&lt;br&gt;Transitions can be used to present lesson material, elicit surveys, provide feedback during training applications, and so much more.&lt;/span&gt;</content>
+            </message>
+            <fullScreen>true</fullScreen>
+        </Guidance>
+        <TrainingApplication>
+            <transitionName>VR-Engage</transitionName>
+            <trainingAppTypeEnum>VR-Engage</trainingAppTypeEnum>
+            <dkfRef>
+                <file>VR-Engage_20179b7f-e0c6-46ea-aa21-1a6646d2105a.dkf.xml</file>
+            </dkfRef>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vrengage.VREngageInterface</InteropImpl>
+                    <InteropInputs>
+                        <VREngageInteropInputs>
+                            <loadArgs/>
+                        </VREngageInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+    </transitions>
+</Course>

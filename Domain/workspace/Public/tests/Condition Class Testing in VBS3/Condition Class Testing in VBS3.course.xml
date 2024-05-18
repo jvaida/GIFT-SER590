@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Course xmlns:ns2="http://GIFT.com/common" name="Condition Class Testing in VBS3" version="11.0.1">
+    <lastSuccessfulValidation>2020:08:28 12:50:48:883 -0400</lastSuccessfulValidation>
+    <ns2:surveyContext>27</ns2:surveyContext>
+    <concepts>
+        <hierarchy>
+            <conceptNode name="all concepts"/>
+        </hierarchy>
+    </concepts>
+    <transitions>
+        <Guidance>
+            <transitionName>About this course</transitionName>
+            <message>
+                <content>This course contains individual VBS course objects that can be used to test the functionality and assessment output for all available condition classes in VBS3. The title of each VBS course object identifies which condition class is authored within it.&amp;nbsp;</content>
+            </message>
+            <fullScreen>true</fullScreen>
+        </Guidance>
+        <TrainingApplication>
+            <transitionName>Avoid Location Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Avoid Location Test_914e4568-d727-49db-8e26-58ae5e070969.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Corridor Boundary Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Corridor Boundary Test_7769f6af-d7ca-4c77-8517-8fa93bc3e65b.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Corridor Posture Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Corridor Boundary Test_7769f6af-d7ca-4c77-8517-8fa93bc3e65b - Copy.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Halt Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Avoid Location Test_914e4568-d727-49db-8e26-58ae5e070969 - Copy.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Health Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Avoid Location Test_914e4568-d727-49db-8e26-58ae5e070969 - Copy - Copy.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Muzzle Flagging Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Muzzle Flagging Test_f3df87f7-bdaf-4f79-8074-96a22279162d.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Spacing Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Spacing Test_766cc06e-1467-47e3-9a11-1e7337c28a05.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>true</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario_3players.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Speed Limit Test</transitionName>
+            <trainingAppTypeEnum>VBS</trainingAppTypeEnum>
+            <dkfRef>
+                <file>Spacing Test_766cc06e-1467-47e3-9a11-1e7337c28a05 - Copy.dkf.xml</file>
+            </dkfRef>
+            <options>
+                <disabled>false</disabled>
+            </options>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.vbsplugin.VBSPluginInterface</InteropImpl>
+                    <InteropInputs>
+                        <VBSInteropInputs>
+                            <loadArgs>
+<ScenarioName>CASS_integration_scenario.Sara</ScenarioName>
+                            </loadArgs>
+                        </VBSInteropInputs>
+                    </InteropInputs>
+                </interop>
+                <interop>
+                    <InteropImpl>gateway.interop.dis.DISInterface</InteropImpl>
+                    <InteropInputs>
+                        <DISInteropInputs>
+                            <loadArgs/>
+                        </DISInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <AAR>
+            <transitionName>VBS Review</transitionName>
+            <fullScreen>true</fullScreen>
+        </AAR>
+    </transitions>
+</Course>

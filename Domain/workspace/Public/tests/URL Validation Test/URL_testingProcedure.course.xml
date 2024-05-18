@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Course xmlns:ns2="http://GIFT.com/common" name="TEST - URL Testing Procedures" version="11.0.1">
+    <description>This course is used to test the URL validation logic on various types of URLs for different course related elements.</description>
+    <image>regression.png</image>
+    <transitions>
+        <Guidance>
+            <transitionName>Guidance Test 1 - Typical YouTube URL</transitionName>
+            <URL>
+                <address>http://www.youtube.com/watch?feature=player_embedded&amp;v=jciijU8Mj_Y</address>
+            </URL>
+            <fullScreen>true</fullScreen>
+        </Guidance>
+        <Guidance>
+            <transitionName>Guidance Test 2 - Insecure WebPage URL</transitionName>
+            <URL>
+                <address>http://www.google.com</address>
+            </URL>
+        </Guidance>
+        <Guidance>
+            <transitionName>Guidance Test 3 - Secure WebPage URL</transitionName>
+            <URL>
+                <address>https://mail.google.com/mail/u/0/?ui=2&amp;shva=1#inbox</address>
+            </URL>
+        </Guidance>
+        <LessonMaterial>
+            <transitionName>Lesson Material</transitionName>
+            <LessonMaterialList>
+                <media>
+                    <name>Lesson Material List Test 1 - Insecure WebPage URL</name>
+                    <uri>http://www.youtube.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>Lesson Material List Test 3 - Typical YouTube URL (AutoPlay = ON)</name>
+                    <uri>https://www.youtube.com/watch?v=MKXPWieCVnI&amp;feature=c4-overview&amp;list=UU0wrQUMS8YT4X2stXhWUffQ</uri>
+                    <YoutubeVideoProperties>
+                        <allowAutoPlay>true</allowAutoPlay>
+                    </YoutubeVideoProperties>
+                </media>
+                <media>
+                    <name>Lesson Material List Test 4 - Embedded YouTube URL</name>
+                    <uri>https://www.youtube.com/embed/OQSoEPxiTTY?rel=0&amp;showinfo=0</uri>
+                    <YoutubeVideoProperties/>
+                </media>
+                <media>
+                    <name>Lesson Material List Test 5 - Secure WebPage URL</name>
+                    <uri>https://gifttutoring.org/issues/714</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>Lesson Material File Test 1 - Typical YouTube URL</name>
+                    <uri>http://www.youtube.com/watch?feature=player_embedded&amp;v=jciijU8Mj_Y</uri>
+                    <YoutubeVideoProperties>
+                        <size>
+                            <width>420</width>
+                            <height>315</height>
+                        </size>
+                        <allowFullScreen>true</allowFullScreen>
+                    </YoutubeVideoProperties>
+                </media>
+                <media>
+                    <name>Lesson Material File Test 2 - Secure WebPage URL</name>
+                    <uri>https://gifttutoring.org/issues/714</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>Lesson Material File Test 3 - Insecure WebPage URL</name>
+                    <uri>http://gifttutoring.org/projects/gift/wiki/Overview</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>Lesson Material File Test 4 - Embedded YouTube URL (AutoPlay = ON)</name>
+                    <uri>https://www.youtube.com/embed/OQSoEPxiTTY?rel=0&amp;showinfo=0</uri>
+                    <YoutubeVideoProperties>
+                        <size>
+                            <width>420</width>
+                            <height>315</height>
+                        </size>
+                        <allowFullScreen>true</allowFullScreen>
+                        <allowAutoPlay>true</allowAutoPlay>
+                    </YoutubeVideoProperties>
+                </media>
+                <media>
+                    <name>Lesson Material File Test 5 - Secure WebPage URL</name>
+                    <uri>https://mail.google.com/mail/u/0/?ui=2&amp;shva=1#inbox</uri>
+                    <WebpageProperties/>
+                </media>
+            </LessonMaterialList>
+        </LessonMaterial>
+        <LessonMaterial>
+            <transitionName>Arbirtrary URL Test</transitionName>
+            <LessonMaterialList>
+                <media>
+                    <name>cnn.com</name>
+                    <uri>cnn.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>www.cnn.com</name>
+                    <uri>www.cnn.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>http://cnn.com</name>
+                    <uri>http://cnn.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>https://cnn.com</name>
+                    <uri>https://cnn.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>reddit.com</name>
+                    <uri>reddit.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>twitch.tv</name>
+                    <uri>twitch.tv</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>http://paypal.com</name>
+                    <uri>http://paypal.com</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>https://www.goarmy.com</name>
+                    <uri>https://www.goarmy.com/soldier-life/being-a-soldier/living-the-army-values.html</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>http://www.ultimate-guitar.com/</name>
+                    <uri>http://www.ultimate-guitar.com/</uri>
+                    <WebpageProperties/>
+                </media>
+                <media>
+                    <name>http://petapixel.com</name>
+                    <uri>http://petapixel.com</uri>
+                    <WebpageProperties/>
+                </media>
+            </LessonMaterialList>
+        </LessonMaterial>
+    </transitions>
+</Course>

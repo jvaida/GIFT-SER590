@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Course xmlns:ns2="http://GIFT.com/common" name="TEST - Same Origin Policy Content" version="11.0.1">
+    <image>regression.png</image>
+    <transitions>
+        <Guidance>
+            <transitionName>Pre-requisites</transitionName>
+            <message>
+                <content>&lt;html&gt;The pre-requisites to run this course are:&lt;ol&gt;&lt;li&gt;pre-requisite A&lt;/li&gt;&lt;li&gt;pre-requisite B&lt;/li&gt;&lt;li&gt;pre-requisite C&lt;/li&gt;&lt;/ol&gt;&lt;/html&gt;</content>
+            </message>
+        </Guidance>
+        <LessonMaterial>
+            <transitionName>Invalid Lesson Material 1</transitionName>
+            <LessonMaterialList>
+                <media>
+                    <name>Invalid Media 1</name>
+                    <uri>https://www.google.com/</uri>
+                    <WebpageProperties/>
+                </media>
+            </LessonMaterialList>
+        </LessonMaterial>
+        <LessonMaterial>
+            <transitionName>Invalid Lesson Material 2</transitionName>
+            <LessonMaterialList>
+                <media>
+                    <name>Invalid Media 2</name>
+                    <uri>https://www.khanacademy.org/math/arithmetic-home/addition-subtraction</uri>
+                    <WebpageProperties/>
+                </media>
+            </LessonMaterialList>
+        </LessonMaterial>
+        <LessonMaterial>
+            <transitionName>Valid Lesson Material</transitionName>
+            <LessonMaterialList>
+                <media>
+                    <name>Valid Media</name>
+                    <uri>http://dignitastechnologies.com/</uri>
+                    <WebpageProperties/>
+                </media>
+            </LessonMaterialList>
+        </LessonMaterial>
+        <Guidance>
+            <transitionName>Invalid Guidance</transitionName>
+            <URL>
+                <address>https://www.khanacademy.org/math/arithmetic-home/addition-subtraction</address>
+                <message>Invalid URL</message>
+            </URL>
+        </Guidance>
+        <Guidance>
+            <transitionName>Valid Guidance</transitionName>
+            <URL>
+                <address>http://dignitastechnologies.com/</address>
+                <message>Valid URL</message>
+            </URL>
+            <fullScreen>true</fullScreen>
+        </Guidance>
+        <TrainingApplication>
+            <transitionName>Invalid Training Application</transitionName>
+            <dkfRef>
+                <file>simplest.dkf.xml</file>
+            </dkfRef>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.ppt.PPTInterface</InteropImpl>
+                    <InteropInputs>
+                        <PowerPointInteropInputs>
+                            <loadArgs>
+<ShowFile>Invalid_URL.ppsm</ShowFile>
+                            </loadArgs>
+                        </PowerPointInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <Guidance>
+                <transitionName>TA Invalid Guidance</transitionName>
+                <URL>
+                    <address>https://www.khanacademy.org/math/arithmetic-home/addition-subtraction</address>
+                    <message>This URL is invalid.</message>
+                </URL>
+                <displayTime>60</displayTime>
+                <fullScreen>true</fullScreen>
+            </Guidance>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+        <TrainingApplication>
+            <transitionName>Valid Training Application</transitionName>
+            <dkfRef>
+                <file>simplest.dkf.xml</file>
+            </dkfRef>
+            <interops>
+                <interop>
+                    <InteropImpl>gateway.interop.ppt.PPTInterface</InteropImpl>
+                    <InteropInputs>
+                        <PowerPointInteropInputs>
+                            <loadArgs>
+<ShowFile>Valid_URL.ppsm</ShowFile>
+                            </loadArgs>
+                        </PowerPointInteropInputs>
+                    </InteropInputs>
+                </interop>
+            </interops>
+            <Guidance>
+                <transitionName>TA Valid Guidance</transitionName>
+                <URL>
+                    <address>http://dignitastechnologies.com/</address>
+                    <message>This URL is valid.</message>
+                </URL>
+                <displayTime>60</displayTime>
+                <fullScreen>true</fullScreen>
+            </Guidance>
+            <finishedWhen>Stopped</finishedWhen>
+        </TrainingApplication>
+    </transitions>
+</Course>

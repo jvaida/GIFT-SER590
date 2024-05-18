@@ -1,0 +1,195 @@
+version=23;
+class Mission
+{
+	addOns[]=
+	{
+		"vbs2_people_us_army_rifleman_ocp",
+		"cabuildings",
+		"camisc"
+	};
+	addOnsAuto[]=
+	{
+		"vbs2_people_us_army_rifleman_ocp",
+		"cabuildings",
+		"camisc"
+	};
+	randomSeed=7888806;
+	class Intel
+	{
+		briefingName="CASS_integration_scenario_3players";
+		startWeather=0.1;
+		forecastWeather=0.30000001;
+		year=2020;
+		month=7;
+		day=28;
+		hour=11;
+		minute=20;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+	class Groups
+	{
+		items=3;
+		class Item0
+		{
+			side="WEST";
+			name="1-1-A-1";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={12734.564,16.946289,8781.9082};
+					positionASL[]={12734.564,16.946289,8781.9082};
+					special="CAN_COLLIDE";
+					id=0;
+					side="WEST";
+					vehicle="VBS2_US_ARMY_Leader_OCP_M_medium_iotv_none_M4RCO";
+					player="PLAY CDG";
+					leader=1;
+					rankName="PRIVATE";
+					skill=0.60000002;
+					text="p1";
+				};
+			};
+		};
+		class Item1
+		{
+			side="WEST";
+			name="1-1-A-2";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={12738.316,17.01149,8782.2188};
+					positionASL[]={12738.316,17.01149,8782.2188};
+					special="CAN_COLLIDE";
+					id=1;
+					side="WEST";
+					vehicle="VBS2_US_ARMY_Leader_OCP_F_medium_iotv_none_M4RCO";
+					player="PLAYER COMMANDER";
+					leader=1;
+					rankName="PRIVATE";
+					skill=0.60000002;
+					text="p2";
+				};
+			};
+		};
+		class Item2
+		{
+			side="WEST";
+			name="1-1-A-3";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={12741.94,17.061951,8781.7412};
+					positionASL[]={12741.94,17.061951,8781.7412};
+					special="CAN_COLLIDE";
+					id=2;
+					side="WEST";
+					vehicle="VBS2_US_ARMY_Leader_OCP_F_medium_iotv_none_M4RCO";
+					player="PLAY CDG";
+					leader=1;
+					rankName="PRIVATE";
+					skill=0.60000002;
+					text="p3";
+				};
+			};
+		};
+	};
+	Biotope="";
+	BiotopeFile="";
+	BiotopeSource=0;
+	class DeletedMapObjects
+	{
+		items=0;
+	};
+	TerrainModifs[]={0,0,0,0,0};
+	RiverModifs[]={0,0,0,0,0};
+	SnowModifs[]={0,0,0,0,0};
+	SeastatesRandomSeed=13867858;
+};
+class Intro
+{
+	randomSeed=1710812;
+	class Intel
+	{
+		startWeather=0.1;
+		forecastWeather=0.30000001;
+		year=2020;
+		month=7;
+		day=28;
+		hour=11;
+		minute=21;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+	Biotope="";
+	BiotopeFile="";
+	BiotopeSource=0;
+	class DeletedMapObjects
+	{
+		items=0;
+	};
+	TerrainModifs[]={0,0,0,0,0};
+	RiverModifs[]={0,0,0,0,0};
+	SnowModifs[]={0,0,0,0,0};
+	SeastatesRandomSeed=13867858;
+};
+class OutroWin
+{
+	randomSeed=2881710;
+	class Intel
+	{
+		startWeather=0.1;
+		forecastWeather=0.30000001;
+		year=2020;
+		month=7;
+		day=28;
+		hour=11;
+		minute=21;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+	Biotope="";
+	BiotopeFile="";
+	BiotopeSource=0;
+	class DeletedMapObjects
+	{
+		items=0;
+	};
+	TerrainModifs[]={0,0,0,0,0};
+	RiverModifs[]={0,0,0,0,0};
+	SnowModifs[]={0,0,0,0,0};
+	SeastatesRandomSeed=13867858;
+};
+class OutroLoose
+{
+	randomSeed=2281533;
+	class Intel
+	{
+		startWeather=0.1;
+		forecastWeather=0.30000001;
+		year=2020;
+		month=7;
+		day=28;
+		hour=11;
+		minute=21;
+		startFogDecay=0.0049999999;
+		forecastFogDecay=0.0049999999;
+	};
+	Biotope="";
+	BiotopeFile="";
+	BiotopeSource=0;
+	class DeletedMapObjects
+	{
+		items=0;
+	};
+	TerrainModifs[]={0,0,0,0,0};
+	RiverModifs[]={0,0,0,0,0};
+	SnowModifs[]={0,0,0,0,0};
+	SeastatesRandomSeed=13867858;
+};

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="Real-time Assessment" version="11.0.1">
+    <description>This is the simplest DKF that can be used by most training applications.  It only contains 1 condition, the Application Completed Condition, which when triggered will end the domain assessment and therefore the Training Application course element.</description>
+    <resources>
+        <AvailableLearnerActions/>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Parent Task" nodeId="1">
+                <endTriggers>
+                    <trigger>
+                        <childConceptEnded nodeId="2"/>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Corridor Posture" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.CorridorPostureCondition</conditionImpl>
+<input>
+    <CorridorPostureCondition>
+        <postures>
+            <posture>Running</posture>
+            <posture>Standing</posture>
+            <posture>Walking</posture>
+        </postures>
+        <pathRef/>
+        <teamMemberRefs>
+            <teamMemberRef>Player 1</teamMemberRef>
+        </teamMemberRefs>
+    </CorridorPostureCondition>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                </concepts>
+            </task>
+        </tasks>
+        <objects>
+            <PlacesOfInterest/>
+        </objects>
+    </assessment>
+    <actions>
+        <stateTransitions/>
+        <instructionalStrategies/>
+    </actions>
+    <teamOrganization>
+        <team name="Everyone">
+            <teamMember name="Player 1" playable="true">
+                <learnerId>
+                    <entityMarking>p1</entityMarking>
+                </learnerId>
+            </teamMember>
+            <teamMember name="Player 2" playable="true">
+                <learnerId>
+                    <entityMarking>p2</entityMarking>
+                </learnerId>
+            </teamMember>
+        </team>
+    </teamOrganization>
+</Scenario>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="simplest" version="11.0.1">
+    <description>This is the simplest DKF that can be used by most training applications.  It only contains 1 condition, the Application Completed Condition, which when triggered will end the domain assessment and therefore the Training Applicaton course element.</description>
+    <resources>
+        <AvailableLearnerActions>
+            <ns3:LearnerActionsList>
+                <ns3:learnerAction>
+                    <ns3:type>Tutor Me</ns3:type>
+                    <ns3:displayName>Prime Numbers</ns3:displayName>
+                    <ns3:description>This will tutor you on what a prime number is.</ns3:description>
+                    <ns3:TutorMeParams>
+                        <ns2:conversationTreeFile>
+                            <ns2:name>primeNumbers.conversationTree.xml</ns2:name>
+                        </ns2:conversationTreeFile>
+                    </ns3:TutorMeParams>
+                </ns3:learnerAction>
+                <ns3:learnerAction>
+                    <ns3:type>Tutor Me</ns3:type>
+                    <ns3:displayName>Help!  I don't know the difference between an even number &lt;br&gt;&lt;br&gt; and an odd number!</ns3:displayName>
+                    <ns3:TutorMeParams>
+                        <ns2:conversationTreeFile>
+                            <ns2:name>evenNumbers.conversationTree.xml</ns2:name>
+                        </ns2:conversationTreeFile>
+                    </ns3:TutorMeParams>
+                </ns3:learnerAction>
+                <ns3:learnerAction>
+                    <ns3:type>Tutor Me</ns3:type>
+                    <ns3:displayName>Help!  What is COIN?</ns3:displayName>
+                    <ns3:TutorMeParams>
+                        <ns3:AutoTutorSKO>
+                            <ns2:ATRemoteSKO>
+<ns2:URL>
+    <ns2:address>https://dsspp.gifttutoring.org/retrieve?json={"guid":"f0890bb9-c809-45f5-9db7-8428e267674a","return":"scriptContent"}</ns2:address>
+</ns2:URL>
+                            </ns2:ATRemoteSKO>
+                        </ns3:AutoTutorSKO>
+                    </ns3:TutorMeParams>
+                </ns3:learnerAction>
+            </ns3:LearnerActionsList>
+        </AvailableLearnerActions>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Application Completed Task" nodeId="1">
+                <endTriggers>
+                    <trigger>
+                        <childConceptEnded nodeId="2"/>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Application Completed" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.ApplicationCompletedCondition</conditionImpl>
+<input>
+    <ApplicationCompletedCondition/>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                    <concept name="prime numbers" nodeId="3">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.ApplicationCompletedCondition</conditionImpl>
+<input>
+    <ApplicationCompletedCondition/>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                    <concept name="even numbers" nodeId="4">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.ApplicationCompletedCondition</conditionImpl>
+<input>
+    <ApplicationCompletedCondition/>
+</input>
+<scoring>
+    <count name="Violation Count" units="count">
+        <evaluators>
+            <evaluator assessment="AtExpectation" operator="Equals" value="1"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                    </concept>
+                    <concept name="Ten Second Timer" nodeId="5">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.TimerCondition</conditionImpl>
+<input>
+    <TimerConditionInput>
+        <repeatable>false</repeatable>
+        <interval>10</interval>
+    </TimerConditionInput>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                    <concept name="Fifteen Second Timer" nodeId="6">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.TimerCondition</conditionImpl>
+<input>
+    <TimerConditionInput>
+        <repeatable>false</repeatable>
+        <interval>15</interval>
+    </TimerConditionInput>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                    <concept name="Twenty Second Timer" nodeId="7">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.TimerCondition</conditionImpl>
+<input>
+    <TimerConditionInput>
+        <repeatable>true</repeatable>
+        <interval>20</interval>
+    </TimerConditionInput>
+</input>
+                            </condition>
+                        </conditions>
+                    </concept>
+                </concepts>
+            </task>
+        </tasks>
+        <objects/>
+    </assessment>
+    <actions>
+        <stateTransitions>
+            <stateTransition name="Ten Second State Transition">
+                <LogicalExpression>
+                    <performanceNode name="Time Fired" nodeId="5">
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="Ten Second State Transition"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="Fifteen Second State Transition">
+                <LogicalExpression>
+                    <performanceNode name="Time Fired" nodeId="6">
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="Fifteen Second State Transition"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="Every Twenty Second State Transition">
+                <LogicalExpression>
+                    <performanceNode name="Time Fired" nodeId="7">
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="Every Twenty Second State Transition"/>
+                </strategyChoices>
+            </stateTransition>
+        </stateTransitions>
+        <instructionalStrategies>
+            <strategy name="Ten Second State Transition">
+                <performanceAssessment>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <Conversation>
+                        <ns2:conversationTreeFile>
+                            <ns2:name>evenNumbers.conversationTree.xml</ns2:name>
+                        </ns2:conversationTreeFile>
+                    </Conversation>
+                </performanceAssessment>
+            </strategy>
+            <strategy name="Fifteen Second State Transition">
+                <performanceAssessment>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <Conversation>
+                        <ns3:AutoTutorSKO>
+                            <ns2:ATRemoteSKO>
+<ns2:URL>
+    <ns2:address>https://dsspp.gifttutoring.org/retrieve?json={"guid":"f0890bb9-c809-45f5-9db7-8428e267674a","return":"scriptContent"}</ns2:address>
+</ns2:URL>
+                            </ns2:ATRemoteSKO>
+                        </ns3:AutoTutorSKO>
+                    </Conversation>
+                </performanceAssessment>
+            </strategy>
+            <strategy name="Every Twenty Second State Transition">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>This is an example feedback that should appear every 20 seconds.</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+        </instructionalStrategies>
+    </actions>
+</Scenario>

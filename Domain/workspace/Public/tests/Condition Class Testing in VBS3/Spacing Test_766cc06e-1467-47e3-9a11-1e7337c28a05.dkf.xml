@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="Real-time Assessment" version="11.0.1">
+    <description>This is the simplest DKF that can be used by most training applications.  It only contains 1 condition, the Application Completed Condition, which when triggered will end the domain assessment and therefore the Training Application course element.</description>
+    <resources>
+        <AvailableLearnerActions>
+            <ns3:LearnerActionsList>
+                <ns3:learnerAction>
+                    <ns3:type>Radio</ns3:type>
+                    <ns3:displayName>End Scenario</ns3:displayName>
+                </ns3:learnerAction>
+            </ns3:LearnerActionsList>
+        </AvailableLearnerActions>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Parent Task" nodeId="1">
+                <endTriggers>
+                    <trigger>
+                        <ns3:learnerActionReference>
+                            <ns3:name>End Scenario</ns3:name>
+                        </ns3:learnerActionReference>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Spacing" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.SpacingCondition</conditionImpl>
+<input>
+    <SpacingCondition>
+        <minDurationBeforeViolation>5</minDurationBeforeViolation>
+        <spacingPair>
+            <firstObject>
+                <teamMemberRef>Player 1</teamMemberRef>
+            </firstObject>
+            <secondObject>
+                <teamMemberRef>Player 2</teamMemberRef>
+            </secondObject>
+            <ideal>
+                <idealMaxSpacing>20</idealMaxSpacing>
+                <idealMinSpacing>15</idealMinSpacing>
+            </ideal>
+            <acceptable>
+                <acceptableMaxSpacing>25</acceptableMaxSpacing>
+                <acceptableMinSpacing>10</acceptableMinSpacing>
+            </acceptable>
+        </spacingPair>
+        <spacingPair>
+            <firstObject>
+                <teamMemberRef>Player 1</teamMemberRef>
+            </firstObject>
+            <secondObject>
+                <teamMemberRef>Player 3</teamMemberRef>
+            </secondObject>
+            <ideal>
+                <idealMaxSpacing>20</idealMaxSpacing>
+                <idealMinSpacing>15</idealMinSpacing>
+            </ideal>
+            <acceptable>
+                <acceptableMaxSpacing>25</acceptableMaxSpacing>
+                <acceptableMinSpacing>10</acceptableMinSpacing>
+            </acceptable>
+        </spacingPair>
+    </SpacingCondition>
+</input>
+<scoring>
+    <count name="Violation Count" units="count">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="5"/>
+            <evaluator assessment="AtExpectation" operator="LessThan" value="5"/>
+        </evaluators>
+    </count>
+    <violation_time name="Violation Time" units="hh:mm:ss">
+        <evaluators>
+            <evaluator assessment="BelowExpectation" operator="GreaterThan" value="00:00:10"/>
+            <evaluator assessment="AtExpectation" operator="LessThanEquals" value="00:00:05"/>
+        </evaluators>
+    </violation_time>
+</scoring>
+                            </condition>
+                        </conditions>
+                    </concept>
+                </concepts>
+            </task>
+        </tasks>
+        <objects>
+            <PlacesOfInterest/>
+        </objects>
+    </assessment>
+    <actions>
+        <stateTransitions>
+            <stateTransition name="spacing at expectation">
+                <LogicalExpression>
+                    <performanceNode name="Spacing" nodeId="2">
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="at expectation"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="spacing below expectation">
+                <LogicalExpression>
+                    <performanceNode name="Spacing" nodeId="2">
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="below expectation"/>
+                </strategyChoices>
+            </stateTransition>
+        </stateTransitions>
+        <instructionalStrategies>
+            <strategy name="at expectation">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Spacing At Expectation
+</ns4:content>
+                            <ns4:Delivery>
+<ns4:InTutor>
+    <ns4:TextEnhancement>NoEffect</ns4:TextEnhancement>
+    <ns4:MessagePresentation>TextOnly</ns4:MessagePresentation>
+</ns4:InTutor>
+                            </ns4:Delivery>
+                        </ns4:message>
+                        <ns4:teamRef value="Player 1"/>
+                        <ns4:teamRef value="Player 2"/>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="below expectation">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Spacing Below Expectation</ns4:content>
+                            <ns4:Delivery>
+<ns4:InTutor>
+    <ns4:TextEnhancement>NoEffect</ns4:TextEnhancement>
+    <ns4:MessagePresentation>TextOnly</ns4:MessagePresentation>
+</ns4:InTutor>
+                            </ns4:Delivery>
+                        </ns4:message>
+                        <ns4:teamRef value="Player 1"/>
+                        <ns4:teamRef value="Player 2"/>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+        </instructionalStrategies>
+    </actions>
+    <teamOrganization>
+        <team name="Everyone">
+            <teamMember name="Player 1" playable="true">
+                <learnerId>
+                    <entityMarking>p1</entityMarking>
+                </learnerId>
+            </teamMember>
+            <teamMember name="Player 2" playable="true">
+                <learnerId>
+                    <entityMarking>p2</entityMarking>
+                </learnerId>
+            </teamMember>
+            <teamMember name="Player 3" playable="true">
+                <learnerId>
+                    <entityMarking>p3</entityMarking>
+                </learnerId>
+            </teamMember>
+        </team>
+    </teamOrganization>
+</Scenario>

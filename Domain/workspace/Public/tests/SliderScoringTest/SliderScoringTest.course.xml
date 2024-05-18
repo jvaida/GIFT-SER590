@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Course xmlns:ns2="http://GIFT.com/common" name="TEST - Slider Survey Scoring" version="11.0.1">
+    <description>This course is used to test scoring survey question(s) with sliders.</description>
+    <image>regression.png</image>
+    <ns2:surveyContext>13</ns2:surveyContext>
+    <transitions>
+        <PresentSurvey>
+            <transitionName>survey with slider</transitionName>
+            <ns2:GIFTSurveyKey>Slider</ns2:GIFTSurveyKey>
+        </PresentSurvey>
+        <AAR>
+            <transitionName>survey results</transitionName>
+        </AAR>
+    </transitions>
+</Course>

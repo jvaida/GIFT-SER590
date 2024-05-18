@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Scenario xmlns:ns2="http://GIFT.com/common" xmlns:ns3="http://GIFT.com/learnerActions" xmlns:ns4="http://GIFT.com/pedagogicalStrategy" name="TSP 07-GFT-0137 ClearBldg.jtc_shakarat" version="11.0.1">
+    <description>This DKF is used to assess concepts associated with a Clear Building scenario.</description>
+    <resources>
+        <ns2:surveyContext>4</ns2:surveyContext>
+        <AvailableLearnerActions>
+            <ns3:LearnerActionsList>
+                <ns3:learnerAction>
+                    <ns3:type>Radio</ns3:type>
+                    <ns3:displayName>Use Radio</ns3:displayName>
+                </ns3:learnerAction>
+            </ns3:LearnerActionsList>
+            <LearnerActionsFiles>
+                <file>LearnerActions\TSP.learnerActions.xml</file>
+            </LearnerActionsFiles>
+        </AvailableLearnerActions>
+    </resources>
+    <assessment>
+        <tasks>
+            <task name="Clear Building" nodeId="1">
+                <startTriggers>
+                    <trigger>
+                        <entityLocation>
+                            <entityId>
+<learnerId>
+    <startLocation>
+        <ns2:coordinate>
+            <ns2:GCC>
+                <ns2:x>3742101.5</ns2:x>
+                <ns2:y>3743832.25</ns2:y>
+                <ns2:z>3546412.5</ns2:z>
+            </ns2:GCC>
+        </ns2:coordinate>
+    </startLocation>
+</learnerId>
+                            </entityId>
+                            <triggerLocation>
+<ns2:coordinate>
+    <ns2:GCC>
+        <ns2:x>3742101.5</ns2:x>
+        <ns2:y>3743832.25</ns2:y>
+        <ns2:z>3546412.5</ns2:z>
+    </ns2:GCC>
+</ns2:coordinate>
+                            </triggerLocation>
+                        </entityLocation>
+                    </trigger>
+                </startTriggers>
+                <endTriggers>
+                    <trigger>
+                        <conceptEnded nodeId="5"/>
+                    </trigger>
+                </endTriggers>
+                <concepts>
+                    <concept name="Secure Personnel" nodeId="2">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.EliminateHostilesCondition</conditionImpl>
+<input>
+    <EliminateHostilesCondition>
+        <entities>
+            <startLocation>
+                <ns2:coordinate>
+                    <ns2:GCC>
+                        <ns2:x>3742092.75</ns2:x>
+                        <ns2:y>3743767.5</ns2:y>
+                        <ns2:z>3546489.25</ns2:z>
+                    </ns2:GCC>
+                </ns2:coordinate>
+            </startLocation>
+            <startLocation>
+                <ns2:coordinate>
+                    <ns2:GCC>
+                        <ns2:x>3742098.75</ns2:x>
+                        <ns2:y>3743770.25</ns2:y>
+                        <ns2:z>3546489.0</ns2:z>
+                    </ns2:GCC>
+                </ns2:coordinate>
+            </startLocation>
+        </entities>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </EliminateHostilesCondition>
+</input>
+<scoring>
+    <count name="Kill Count" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="2"/>
+            <evaluator assessment="BelowExpectation" operator="LessThanEquals" value="1"/>
+        </evaluators>
+    </count>
+</scoring>
+<default assessment="BelowExpectation"/>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="Scan Perimeter" nodeId="3">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.IdentifyPOIsCondition</conditionImpl>
+<input>
+    <IdentifyPOIsCondition>
+        <pois>
+            <pointRef value="bldg_exterior_poi_1"/>
+            <pointRef value="bldg_exterior_poi_2"/>
+            <pointRef value="bldg_exterior_poi_3"/>
+            <pointRef value="bldg_exterior_poi_4"/>
+            <pointRef value="bldg_exterior_poi_5"/>
+            <pointRef value="bldg_exterior_poi_6"/>
+            <pointRef value="bldg_exterior_poi_7"/>
+            <pointRef value="bldg_exterior_poi_8"/>
+        </pois>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </IdentifyPOIsCondition>
+</input>
+<scoring>
+    <count name="identified POIs" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="8"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="7"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="0"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments>
+                            <survey>
+<ns2:GIFTSurveyKey>MidLesson</ns2:GIFTSurveyKey>
+<questions>
+    <question key="35">
+        <reply key="16" result="AboveExpectation"/>
+        <reply key="17" result="AboveExpectation"/>
+    </question>
+</questions>
+                            </survey>
+                        </assessments>
+                    </concept>
+                    <concept name="Enter Building" nodeId="4">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.EnterAreaCondition</conditionImpl>
+<input>
+    <EnterAreaCondition>
+        <entrance assessment="AboveExpectation" name="North entrance">
+            <outside proximity="1.0" point="store front door - outside"/>
+            <inside proximity="1.0" point="store front door - inside"/>
+        </entrance>
+        <entrance assessment="BelowExpectation" name="North entrance">
+            <outside proximity="1.0" point="front door - outside"/>
+            <inside proximity="1.0" point="front door - inside"/>
+        </entrance>
+        <entrance assessment="BelowExpectation" name="hidden back door">
+            <outside proximity="1.0" point="hidden back door - outside"/>
+            <inside proximity="1.0" point="hidden back door - inside"/>
+        </entrance>
+        <teamMemberRef>learner</teamMemberRef>
+    </EnterAreaCondition>
+</input>
+<scoring>
+    <count name="Violation Count" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="0"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="1"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="Fill out Spot Report" nodeId="5">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.SpotReportCondition</conditionImpl>
+<input>
+    <SpotReportCondition>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </SpotReportCondition>
+</input>
+<scoring>
+    <count name="ReportCount" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="1"/>
+            <evaluator assessment="BelowExpectation" operator="Equals" value="0"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="SITREP" nodeId="6">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.UseRadioCondition</conditionImpl>
+<input>
+    <UseRadioCondition>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </UseRadioCondition>
+</input>
+<scoring>
+    <count name="RadioUsedCount" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="1"/>
+            <evaluator assessment="BelowExpectation" operator="Equals" value="0"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="Control Your Weapon" nodeId="7">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.LifeformTargetAccuracyCondition</conditionImpl>
+<input>
+    <LifeformTargetAccuracyCondition>
+        <entities>
+            <startLocation>
+                <ns2:coordinate>
+                    <ns2:GCC>
+                        <ns2:x>3742092.75</ns2:x>
+                        <ns2:y>3743767.5</ns2:y>
+                        <ns2:z>3546489.25</ns2:z>
+                    </ns2:GCC>
+                </ns2:coordinate>
+            </startLocation>
+            <startLocation>
+                <ns2:coordinate>
+                    <ns2:GCC>
+                        <ns2:x>3742098.75</ns2:x>
+                        <ns2:y>3743770.25</ns2:y>
+                        <ns2:z>3546489.0</ns2:z>
+                    </ns2:GCC>
+                </ns2:coordinate>
+            </startLocation>
+        </entities>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </LifeformTargetAccuracyCondition>
+</input>
+<scoring>
+    <count name="Bad Shot Count" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="0"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="1"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="Clear First Floor" nodeId="8">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.IdentifyPOIsCondition</conditionImpl>
+<input>
+    <IdentifyPOIsCondition>
+        <pois>
+            <pointRef value="bldg_interior_poi_1"/>
+            <pointRef value="bldg_interior_poi_2"/>
+            <pointRef value="bldg_interior_poi_3"/>
+            <pointRef value="bldg_interior_poi_4"/>
+            <pointRef value="bldg_interior_poi_5"/>
+            <pointRef value="bldg_interior_poi_6"/>
+            <pointRef value="bldg_interior_poi_18"/>
+        </pois>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </IdentifyPOIsCondition>
+</input>
+<scoring>
+    <count name="identified POIs" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="7"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="0"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="Clear Second Floor" nodeId="9">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.IdentifyPOIsCondition</conditionImpl>
+<input>
+    <IdentifyPOIsCondition>
+        <pois>
+            <pointRef value="bldg_interior_poi_7"/>
+            <pointRef value="bldg_interior_poi_8"/>
+            <pointRef value="bldg_interior_poi_9"/>
+            <pointRef value="bldg_interior_poi_10"/>
+            <pointRef value="bldg_interior_poi_11"/>
+            <pointRef value="bldg_interior_poi_12"/>
+            <pointRef value="bldg_interior_poi_13"/>
+            <pointRef value="bldg_interior_poi_14"/>
+            <pointRef value="bldg_interior_poi_15"/>
+        </pois>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </IdentifyPOIsCondition>
+</input>
+<scoring>
+    <count name="identified POIs" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="9"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="0"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                    <concept name="Clear Third Floor" nodeId="10">
+                        <conditions>
+                            <condition>
+<conditionImpl>domain.knowledge.condition.IdentifyPOIsCondition</conditionImpl>
+<input>
+    <IdentifyPOIsCondition>
+        <pois>
+            <pointRef value="bldg_interior_poi_16"/>
+            <pointRef value="bldg_interior_poi_17"/>
+        </pois>
+        <teamMemberRefs>
+            <teamMemberRef>learner</teamMemberRef>
+        </teamMemberRefs>
+    </IdentifyPOIsCondition>
+</input>
+<scoring>
+    <count name="identified POIs" units="count">
+        <evaluators>
+            <evaluator assessment="AboveExpectation" operator="Equals" value="-1"/>
+            <evaluator assessment="AtExpectation" operator="Equals" value="2"/>
+            <evaluator assessment="BelowExpectation" operator="GreaterThanEquals" value="0"/>
+        </evaluators>
+    </count>
+</scoring>
+                            </condition>
+                        </conditions>
+                        <assessments/>
+                    </concept>
+                </concepts>
+                <assessments/>
+            </task>
+        </tasks>
+        <objects>
+            <PlacesOfInterest>
+                <point name="hidden back door - outside">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3742088.25</ns2:x>
+                            <ns2:y>3743774.0</ns2:y>
+                            <ns2:z>3546486.75</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+                <point name="hidden back door - inside">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3742089.5</ns2:x>
+                            <ns2:y>3743774.0</ns2:y>
+                            <ns2:z>3546485.75</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+                <point name="front door - outside">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3742095.0</ns2:x>
+                            <ns2:y>3743771.0</ns2:y>
+                            <ns2:z>3546483.5</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+                <point name="front door - inside">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3742094.0</ns2:x>
+                            <ns2:y>3743771.0</ns2:y>
+                            <ns2:z>3546484.25</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+                <point name="store front door - outside">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3742092.5</ns2:x>
+                            <ns2:y>3743764.5</ns2:y>
+                            <ns2:z>3546492.75</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+                <point name="store front door - inside">
+                    <ns2:coordinate>
+                        <ns2:GCC>
+                            <ns2:x>3742092.5</ns2:x>
+                            <ns2:y>3743765.5</ns2:y>
+                            <ns2:z>3546491.5</ns2:z>
+                        </ns2:GCC>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_1">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3331.79</ns2:x>
+                            <ns2:y>3361.04</ns2:y>
+                            <ns2:elevation>0.0015</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_2">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3330.01</ns2:x>
+                            <ns2:y>3369.59</ns2:y>
+                            <ns2:elevation>0.0013</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_3">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3340.40</ns2:x>
+                            <ns2:y>3368.47</ns2:y>
+                            <ns2:elevation>0.0014</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_4">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3343.72</ns2:x>
+                            <ns2:y>3372.14</ns2:y>
+                            <ns2:elevation>0.0014</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_5">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3352.42</ns2:x>
+                            <ns2:y>3361.79</ns2:y>
+                            <ns2:elevation>0.0014</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_6">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3345.28</ns2:x>
+                            <ns2:y>3364.04</ns2:y>
+                            <ns2:elevation>0.0014</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_7">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3341.07</ns2:x>
+                            <ns2:y>3365.25</ns2:y>
+                            <ns2:elevation>0.0014</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_exterior_poi_8">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3341.22</ns2:x>
+                            <ns2:y>3359.18</ns2:y>
+                            <ns2:elevation>0.0014</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_1">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3338.43</ns2:x>
+                            <ns2:y>3362.74</ns2:y>
+                            <ns2:elevation>0.342827</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_2">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3338.8</ns2:x>
+                            <ns2:y>3359.21</ns2:y>
+                            <ns2:elevation>0.286964</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_3">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3335.91</ns2:x>
+                            <ns2:y>3361.86</ns2:y>
+                            <ns2:elevation>0.27853</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_4">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3329.18</ns2:x>
+                            <ns2:y>3364.39</ns2:y>
+                            <ns2:elevation>0.251469</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_5">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3337</ns2:x>
+                            <ns2:y>3364.78</ns2:y>
+                            <ns2:elevation>0.343346</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_6">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3333.89</ns2:x>
+                            <ns2:y>3369.8</ns2:y>
+                            <ns2:elevation>0.345539</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_7">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3338.02</ns2:x>
+                            <ns2:y>3372.73</ns2:y>
+                            <ns2:elevation>5.29576</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_8">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3335.51</ns2:x>
+                            <ns2:y>3374.78</ns2:y>
+                            <ns2:elevation>5.29334</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_9">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3336.07</ns2:x>
+                            <ns2:y>3365.54</ns2:y>
+                            <ns2:elevation>5.2763</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_10">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3332.67</ns2:x>
+                            <ns2:y>3368.86</ns2:y>
+                            <ns2:elevation>5.27411</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_11">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3330.51</ns2:x>
+                            <ns2:y>3371.1</ns2:y>
+                            <ns2:elevation>5.27298</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_12">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3330.64</ns2:x>
+                            <ns2:y>3363.83</ns2:y>
+                            <ns2:elevation>5.11995</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_13">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3339.26</ns2:x>
+                            <ns2:y>3361.11</ns2:y>
+                            <ns2:elevation>5.09501</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_14">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3347.88</ns2:x>
+                            <ns2:y>3365.95</ns2:y>
+                            <ns2:elevation>4.40593</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_15">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3340.76</ns2:x>
+                            <ns2:y>3371.24</ns2:y>
+                            <ns2:elevation>5.29991</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_16">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3335.14</ns2:x>
+                            <ns2:y>3368.99</ns2:y>
+                            <ns2:elevation>8.45815</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_17">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3341.35</ns2:x>
+                            <ns2:y>3371.13</ns2:y>
+                            <ns2:elevation>8.47861</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+                <point name="bldg_interior_poi_18">
+                    <ns2:coordinate>
+                        <ns2:AGL>
+                            <ns2:x>3343.75</ns2:x>
+                            <ns2:y>3368.06</ns2:y>
+                            <ns2:elevation>0.251442</ns2:elevation>
+                        </ns2:AGL>
+                    </ns2:coordinate>
+                </point>
+            </PlacesOfInterest>
+        </objects>
+    </assessment>
+    <actions>
+        <stateTransitions>
+            <stateTransition name="decrease fog on lower arousal">
+                <LogicalExpression>
+                    <ns4:LearnerStateTransitionEnum attribute="Arousal">
+                        <ns4:previous>High</ns4:previous>
+                        <ns4:current>Medium</ns4:current>
+                    </ns4:LearnerStateTransitionEnum>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="decrease fog"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="decrease fog on lowest arousal">
+                <LogicalExpression>
+                    <ns4:LearnerStateTransitionEnum attribute="Arousal">
+                        <ns4:previous>Medium</ns4:previous>
+                        <ns4:current>Low</ns4:current>
+                    </ns4:LearnerStateTransitionEnum>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="decrease fog"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="increase fog on highest arousal">
+                <LogicalExpression>
+                    <ns4:LearnerStateTransitionEnum attribute="Arousal">
+                        <ns4:previous>Medium</ns4:previous>
+                        <ns4:current>High</ns4:current>
+                    </ns4:LearnerStateTransitionEnum>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="increase fog"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="increase fog on higher arousal">
+                <LogicalExpression>
+                    <ns4:LearnerStateTransitionEnum attribute="Arousal">
+                        <ns4:previous>Low</ns4:previous>
+                        <ns4:current>Medium</ns4:current>
+                    </ns4:LearnerStateTransitionEnum>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="increase fog"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="further assess scan perimeter">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Scan Perimeter" nodeId="3">
+                        <previous>BelowExpectation</previous>
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="assess scan perimeter"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="make midnight on highest scan perimeter">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Scan Perimeter" nodeId="3">
+                        <previous>AtExpectation</previous>
+                        <current>AboveExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="change to midnight"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="make midnight on highest engagement">
+                <LogicalExpression>
+                    <ns4:LearnerStateTransitionEnum attribute="Engagement">
+                        <ns4:previous>Low</ns4:previous>
+                        <ns4:current>High</ns4:current>
+                    </ns4:LearnerStateTransitionEnum>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="change to midnight"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="make midday on lowest engagement">
+                <LogicalExpression>
+                    <ns4:LearnerStateTransitionEnum attribute="Engagement">
+                        <ns4:previous>High</ns4:previous>
+                        <ns4:current>Low</ns4:current>
+                    </ns4:LearnerStateTransitionEnum>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="change to midday"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="feedback on wrong report">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Fill out Report" nodeId="5">
+                        <previous>Unknown</previous>
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="spot report problem"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="further assess sitrep">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#SITREP" nodeId="6">
+                        <previous>Unknown</previous>
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="ATSession2"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="feedback on cleared first floor">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Clear First Floor" nodeId="8">
+                        <previous>BelowExpectation</previous>
+                        <current>AtExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="clear first floor reflective"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="positive feedback on enter building">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Enter Building" nodeId="4">
+                        <previous>Unknown</previous>
+                        <current>AboveExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="enter building positive"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="negative feedback on enter building">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Enter Building" nodeId="4">
+                        <previous>Unknown</previous>
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="enter building negative"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="negative feedback on weapon control">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Control Your Weapon" nodeId="7">
+                        <previous>Unknown</previous>
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="control weapon negative first"/>
+                    <strategyRef name="control weapone negative repeated"/>
+                </strategyChoices>
+            </stateTransition>
+            <stateTransition name="AT on no weapon control">
+                <LogicalExpression>
+                    <performanceNode name="Clear Building#Control Your Weapon" nodeId="7">
+                        <previous>AtExpectation</previous>
+                        <current>BelowExpectation</current>
+                    </performanceNode>
+                </LogicalExpression>
+                <strategyChoices>
+                    <strategyRef name="ATSession"/>
+                </strategyChoices>
+            </stateTransition>
+        </stateTransitions>
+        <instructionalStrategies>
+            <strategy name="decrease fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:fog density="0.1"/>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="increase fog">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:fog density="0.9"/>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="assess scan perimeter">
+                <performanceAssessment>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <performanceNode>
+                        <nodeId>3</nodeId>
+                    </performanceNode>
+                </performanceAssessment>
+            </strategy>
+            <strategy name="change to midnight">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:timeOfDay>
+                            <ns4:midnight/>
+                        </ns4:timeOfDay>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="change to midday">
+                <ns4:scenarioAdaptation>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:environmentAdaptation>
+                        <ns4:timeOfDay>
+                            <ns4:midday/>
+                        </ns4:timeOfDay>
+                    </ns4:environmentAdaptation>
+                </ns4:scenarioAdaptation>
+            </strategy>
+            <strategy name="spot report problem">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Please fill out the correct report</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="ATSession2">
+                <performanceAssessment>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <Conversation>
+                        <ns3:AutoTutorSKO>
+                            <ns2:ATRemoteSKO>
+<ns2:URL>
+    <ns2:address>https://dsspp.gifttutoring.org/retrieve?json={"guid":"f0890bb9-c809-45f5-9db7-8428e267674a","return":"scriptContent"}</ns2:address>
+</ns2:URL>
+                            </ns2:ATRemoteSKO>
+                        </ns3:AutoTutorSKO>
+                    </Conversation>
+                </performanceAssessment>
+            </strategy>
+            <strategy name="clear first floor reflective">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Remember, when clearing a room always check the corners and look for anything out of the ordinary!</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="enter building positive">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Good Job! You used the best possible entrance!</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="enter building negative">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Not your best option for entrance. If locked, you do not have the capability to breach this door.</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="control weapon negative first">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Target Missed! Remember to make center of mass your point of aim and always Double Tap!</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="control weapone negative repeated">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Tell your company SGT you need range time!</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+            <strategy name="ATSession">
+                <performanceAssessment>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <Conversation>
+                        <ns3:AutoTutorSKO>
+                            <ns2:ATRemoteSKO>
+<ns2:URL>
+    <ns2:address>https://dsspp.gifttutoring.org/retrieve?json={"guid":"f0890bb9-c809-45f5-9db7-8428e267674a","return":"scriptContent"}</ns2:address>
+</ns2:URL>
+                            </ns2:ATRemoteSKO>
+                        </ns3:AutoTutorSKO>
+                    </Conversation>
+                </performanceAssessment>
+            </strategy>
+            <strategy name="sitrep reflective">
+                <ns4:instructionalIntervention>
+                    <ns4:strategyHandler>
+                        <ns4:impl>domain.knowledge.strategy.DefaultStrategyHandler</ns4:impl>
+                    </ns4:strategyHandler>
+                    <ns4:feedback>
+                        <ns4:message>
+                            <ns4:content>Think about the information you want to relay back to your Commander: Who, what, when, where and why. Remember to keep it brief!</ns4:content>
+                        </ns4:message>
+                    </ns4:feedback>
+                </ns4:instructionalIntervention>
+            </strategy>
+        </instructionalStrategies>
+    </actions>
+    <teamOrganization>
+        <team name="Team of One">
+            <teamMember name="learner" playable="true">
+                <learnerId>
+                    <startLocation>
+                        <ns2:coordinate>
+                            <ns2:GCC>
+<ns2:x>3742101.5</ns2:x>
+<ns2:y>3743832.25</ns2:y>
+<ns2:z>3546412.5</ns2:z>
+                            </ns2:GCC>
+                        </ns2:coordinate>
+                    </startLocation>
+                </learnerId>
+            </teamMember>
+        </team>
+    </teamOrganization>
+</Scenario>
